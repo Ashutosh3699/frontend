@@ -6,6 +6,9 @@ import CTAbutton from '../Components/core/HomePage/CTAbutton';
 import video1 from "../assets/Images/banner.mp4";
 import CodeBlock from '../Components/core/HomePage/CodeBlock';
 import Footer from '../Components/core/footer/Footer';
+import "../App.css";
+import PathFollower from '../Components/core/HomePage/PathFollower';
+import LearnAnyLanguage from '../Components/core/HomePage/LearnAnyLanguage';
 
 const Home = () => {
   return (
@@ -107,7 +110,7 @@ const Home = () => {
                         }
                         codeblock={`<!DOCTYPE html>\n <html>\n <head><title>Example</title><linkrel="stylesheet"href="styles.css">\n</head>\n <body>
                             <h1><ahref="/">Header</a>\n</h1>\n<nav><ahref="one/">One</a><ahref="two/">Two</a><ahref="three/">Three</a>\n</nav>  `} 
-                        codecolor={"text-yellow-25"} 
+                        codecolor={"text-yellow-200"} 
                         bgGradient={"radial-gradient(circle, rgba(146,184,36,1) 0%, rgba(0,0,0,1) 100%)"}
                     />
                 </div>
@@ -117,6 +120,56 @@ const Home = () => {
         </div>
 
         {/* section 2 of homepage */}
+        <div  className='w-full bg-pure-greys-5  lg:pb-16'>
+                
+            <div className=' w-full  homePage  h-[310px]  mx-auto flex justify-center items-center gap-5'>
+                        
+                        <CTAbutton  active={true} linkto={"/signup"}>
+                            <p className='flex items-center gap-2'>
+                                Explore full catalogs 
+                                <FaArrowRight />
+                            </p> 
+                        </CTAbutton>
+
+                        <CTAbutton active={false} linkto={"/login"}>
+                            Learn More
+                        </CTAbutton>
+            </div>
+
+            <div  className='w-11/12 mx-auto  lg:mt-10'>
+
+                <div className='w-[75%] flex gap-6 flex-row mx-auto mb-3 '>
+                        
+                        <h3  className='text-3xl text-richblack-500 font-bold '>
+                            Get the skill you need for a 
+                            <HighLightContext>
+                              <span>  </span>  job that is in Demand
+                            </HighLightContext>
+                        </h3>
+
+                        <div className='flex flex-col items-start gap-8'>
+                            <p  className='text-richblack-500  font-edu-sa'>The modern StudyNotion is the dictates
+                             its own terms. Today, to be a competitive specialist requires more than professional skills.</p>
+
+                            <CTAbutton  active={true} linkto={"/login"}>
+                            <p className='flex items-center gap-2'>
+                               Learn More
+                                <FaArrowRight />
+                            </p> 
+                            </CTAbutton>
+                        </div>
+
+                </div>
+
+
+                <PathFollower/>
+
+                <LearnAnyLanguage/>
+
+                
+            </div>
+
+        </div>
 
         {/* section 3 of homepage */}
         

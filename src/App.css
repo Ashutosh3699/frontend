@@ -7,3 +7,8 @@ html, body{
     height: 100%;
     overflow: hidden auto;
 }
+
+.homePage{
+
+    background-image: url("./assets/Images/bghome.svg");
+}
