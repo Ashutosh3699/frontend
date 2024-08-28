@@ -9,6 +9,7 @@ import Footer from '../Components/core/footer/Footer';
 import "../App.css";
 import PathFollower from '../Components/core/HomePage/PathFollower';
 import LearnAnyLanguage from '../Components/core/HomePage/LearnAnyLanguage';
+import InstrutorImage from "../assets/Images/Instructor.png"
 
 const Home = () => {
   return (
@@ -172,6 +173,35 @@ const Home = () => {
         </div>
 
         {/* section 3 of homepage */}
+
+        <div  className=' bg-richblack-900  w-full h-full  pt-16  pb-8'>
+
+            <div  className='mx-auto w-11/12 flex flex-col  items-center gap-y-6  my-4  mb-10'>
+
+                <div  className='flex flex-row  gap-32  w-[75%] mx-auto  items-center'>
+
+                    <img  src={InstrutorImage} className='w-[40%] drop-shadow-[-20px_-20px_0px_rgba(255,255,255,5)]' />
+
+                    <div  className='flex flex-col items-start gap-6 '>
+                        <h3 className='text-3xl text-richblack-25 font-bold  w-[50%]'>Become an  <HighLightContext>Instructor</HighLightContext></h3>
+
+                        <p  className='text-md text-richblack-25'>Instructors from around the world teach millions of students on StudyNotion. We provide the tools and skills to teach what you love.</p>
+
+                        <CTAbutton  active={true} linkto={"/signup"}>
+                            <p  className='flex gap-2 items-center'>
+                            Start Teaching Today 
+                            <FaArrowRight/>
+                            </p>
+                        </CTAbutton>
+                    </div>
+
+                </div>
+
+                {/* reviews */}
+                
+            </div>
+
+        </div>
         
         <Footer/>
     
