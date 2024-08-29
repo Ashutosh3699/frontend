@@ -18,21 +18,15 @@ const LearnAnyLanguage = () => {
             </div>
       </div>
 
-        <div  className='flex flex-row  relative justify-between  w-[90%]  mx-auto  mt-10'>
+        <div  className='flex flex-row  items-center justify-between '>
+            <img  src={image2}  alt='know your progress' className=' object-contain  ' />
 
-            <div className='w-[100%] '>
-                <img  src={image2}  />
-            </div>
-            <div className=' w-[100%]  absolute   left-[30%]  -top-[10%]'>
-                <img  src={image1}  />
-            </div>
-            <div  className=' z-10  w-[100%] absolute   left-[65%] -top-[10%] '>
-                <img  src={image3}  />
-            </div>
+            <img  src={image1} alt='know your progress'  className=' object-contain  -ml-32'/>
 
+            <img  src={image3} alt='know your progress'  className=' object-contain  -ml-36'/>
         </div>
 
-        <div className='mt-16 '>
+        <div >
             <CTAbutton  active={true}  linkto={"/signup"}>
                 Learn More
             </CTAbutton>

@@ -9,7 +9,8 @@ import Footer from '../Components/core/footer/Footer';
 import "../App.css";
 import PathFollower from '../Components/core/HomePage/PathFollower';
 import LearnAnyLanguage from '../Components/core/HomePage/LearnAnyLanguage';
-import InstrutorImage from "../assets/Images/Instructor.png"
+import InstrutorImage from "../assets/Images/Instructor.png";
+import HomePageExploreContent from '../Components/core/HomePage/HomePageExploreContent';
 
 const Home = () => {
   return (
@@ -116,6 +117,8 @@ const Home = () => {
                     />
                 </div>
 
+                <HomePageExploreContent/>
+
             </div>
 
         </div>
@@ -180,7 +183,7 @@ const Home = () => {
 
                 <div  className='flex flex-row  gap-32  w-[75%] mx-auto  items-center'>
 
-                    <img  src={InstrutorImage} className='w-[40%] drop-shadow-[-20px_-20px_0px_rgba(255,255,255,5)]' />
+                    <img  src={InstrutorImage} alt='instructor' className='w-[40%] drop-shadow-[-20px_-20px_0px_rgba(255,255,255,5)]' />
 
                     <div  className='flex flex-col items-start gap-6 '>
                         <h3 className='text-3xl text-richblack-25 font-bold  w-[50%]'>Become an  <HighLightContext>Instructor</HighLightContext></h3>
