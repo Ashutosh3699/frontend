@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { IoEye, IoEyeOff  } from "react-icons/io5";
 import { Link } from 'react-router-dom';
+import { FaStarOfLife } from "react-icons/fa";
 
 const LoginForm = ({setIsLoggedIn}) => {
 
@@ -65,8 +66,8 @@ const LoginForm = ({setIsLoggedIn}) => {
         >
 
             <div  className='flex flex-col gap-1 items-start  my-4'>
-                <label  htmlFor='email'  className='text-md text-richblack-5 font-semibold pl-4'>
-                    Email Address
+                <label  htmlFor='email'  className='text-md text-richblack-5 font-semibold pl-4 flex gap-1  items-start'>
+                    Email Address  <FaStarOfLife size={6} color='red' />
                 </label>
                 <input
                     type='email'
@@ -82,8 +83,8 @@ const LoginForm = ({setIsLoggedIn}) => {
             </div>
             
             <div className='flex flex-col gap-1 items-start '>
-                <label  htmlFor='password'  className='text-md text-richblack-5 font-semibold  pl-4'>
-                    Password
+                <label  htmlFor='password'  className='text-md text-richblack-5 font-semibold  pl-4 flex gap-1  items-start'>
+                    Password  <FaStarOfLife size={6} color='red' />
                 </label>
 
                 <div  className='flex flex-row w-full relative '>

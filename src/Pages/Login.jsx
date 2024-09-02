@@ -1,7 +1,7 @@
 import React from 'react'
 import Template from '../Components/core/AuthTemplate/Template'
 import loginImg from "../assets/Images/login.webp"
-import Footer from '../Components/core/footer/Footer'
+import Footer from '../Components/common/footer/Footer'
 
 const Login = ({setIsLoggedIn}) => {
   return (

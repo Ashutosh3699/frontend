@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { IoEye, IoEyeOff  } from "react-icons/io5";
+import { FaStarOfLife } from "react-icons/fa";
 
 
 const SignupForm = () => {
@@ -73,8 +74,8 @@ const SignupForm = () => {
         <div  className='flex flex-row gap-3 '>
 
           <div  className='flex flex-col gap-1 items-start  my-4'>
-                <label  htmlFor='firstName'  className='text-md text-richblack-5 font-semibold pl-4'>
-                firstName
+                <label  htmlFor='firstName'  className='text-md text-richblack-5 font-semibold pl-4 flex gap-1  items-start'>
+                firstName  <FaStarOfLife size={6} color='red' />
                 </label>
                 <input
                     type='text'
@@ -90,8 +91,8 @@ const SignupForm = () => {
             </div>
 
             <div  className='flex flex-col gap-1 items-start  my-4'>
-              <label  htmlFor='lastName'  className='text-md text-richblack-5 font-semibold pl-4'>
-              lastName
+              <label  htmlFor='lastName'  className='text-md text-richblack-5 font-semibold pl-4 flex gap-1  items-start'>
+              lastName <FaStarOfLife size={6} color='red' />
               </label>
               <input
                   type='text'
@@ -110,8 +111,8 @@ const SignupForm = () => {
 
 
           <div  className='flex flex-col gap-1 items-start  my-4'>
-              <label  htmlFor='email'  className='text-md text-richblack-5 font-semibold pl-4'>
-                  Email Address
+              <label  htmlFor='email'  className='text-md text-richblack-5 font-semibold pl-4 flex gap-1  items-start'>
+                  Email Address <FaStarOfLife size={6} color='red' />
               </label>
               <input
                   type='email'
@@ -129,8 +130,8 @@ const SignupForm = () => {
           <div  className='flex flex-row gap-3'>
 
             <div className='flex flex-col gap-1 items-start '>
-                <label  htmlFor='password'  className='text-md text-richblack-5 font-semibold  pl-4'>
-                    Password
+                <label  htmlFor='password'  className='text-md text-richblack-5 font-semibold  pl-4 flex gap-1  items-start'>
+                    Password <FaStarOfLife size={6} color='red' />
                 </label>
 
                 <div  className='flex flex-row w-full relative '>
@@ -155,14 +156,14 @@ const SignupForm = () => {
             </div>
 
             <div className='flex flex-col gap-1 items-start '>
-                <label  htmlFor='confirmPassword'  className='text-md text-richblack-5 font-semibold  pl-4'>
-                confirmPassword
+                <label  htmlFor='confirmPassword'  className='text-md text-richblack-5 font-semibold  pl-4 flex gap-1  items-start'>
+                ConfirmPassword <FaStarOfLife size={6} color='red' />
                 </label>
 
                 <div  className='flex flex-row w-full relative '>
                     <input
                         type={showPass? ('text') : ('password')}
-                        placeholder='Enter confirmPassword'
+                        placeholder='Enter Password'
                         name='confirmPassword'
                         id='confirmPassword'
                         required={true}

@@ -5,17 +5,19 @@ import HighLightContext from '../Components/core/HomePage/HighLightContext';
 import CTAbutton from '../Components/core/HomePage/CTAbutton';
 import video1 from "../assets/Images/banner.mp4";
 import CodeBlock from '../Components/core/HomePage/CodeBlock';
-import Footer from '../Components/core/footer/Footer';
+import Footer from '../Components/common/footer/Footer';
 import "../App.css";
 import PathFollower from '../Components/core/HomePage/PathFollower';
 import LearnAnyLanguage from '../Components/core/HomePage/LearnAnyLanguage';
 import InstrutorImage from "../assets/Images/Instructor.png";
 import HomePageExploreContent from '../Components/core/HomePage/HomePageExploreContent';
+import Navbar from '../Components/common/Navbar';
 
 const Home = () => {
   return (
     <div>
 
+        <Navbar/>
         {/* section 1 of homepage */}
         <div className=' bg-richblack-900  w-full h-full  pt-16  pb-8'>
 
