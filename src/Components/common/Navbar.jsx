@@ -27,6 +27,7 @@ const Navbar = () => {
     const {user} = useSelector((state) => state.profile);
     const {cart} = useSelector((state) => state.cart);
 
+    console.log("url is : " , process.env.REACT_APP_BASE_URL);
 
     // const [subLinks, setSubLinks] = useState([]);
 
