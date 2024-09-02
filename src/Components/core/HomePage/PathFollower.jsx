@@ -78,7 +78,7 @@ const PathFollower = () => {
         <div className='relative'>
             
             <div className='w-[100%] drop-shadow-[20px_20px_0px_rgba(255,255,255,5)]'>
-                <img    src={TimeLineImage}  className='w-full'/>
+                <img    src={TimeLineImage} alt='timelineimage'  className='w-full'/>
             </div>
 
             <div  className=' absolute  -bottom-[10%] left-[13%]   bg-caribbeangreen-300  text-richblack-50 flex gap-3 py-4 px-6  w-[75%]'>

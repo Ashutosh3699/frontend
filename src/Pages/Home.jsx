@@ -11,13 +11,11 @@ import PathFollower from '../Components/core/HomePage/PathFollower';
 import LearnAnyLanguage from '../Components/core/HomePage/LearnAnyLanguage';
 import InstrutorImage from "../assets/Images/Instructor.png";
 import HomePageExploreContent from '../Components/core/HomePage/HomePageExploreContent';
-import Navbar from '../Components/common/Navbar';
 
 const Home = () => {
   return (
     <div>
 
-        <Navbar/>
         {/* section 1 of homepage */}
         <div className=' bg-richblack-900  w-full h-full  pt-16  pb-8'>
 
