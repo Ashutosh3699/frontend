@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { IoEye, IoEyeOff  } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 import { FaStarOfLife } from "react-icons/fa";
+import {ACCOUNT_TYPE} from "../../../utils/constant"
 
-const LoginForm = ({setIsLoggedIn}) => {
+const LoginForm = () => {
 
-    const [accountType, setAccountType] = useState("Student");
+    const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT);
     const [showPass, setShowPass] = useState(false);
     const [loginData, setLoginData] = useState({
         email:"",
@@ -19,8 +20,6 @@ const LoginForm = ({setIsLoggedIn}) => {
             ...prev,
             [event.target.name]: event.target.value
         }))
-
-        console.log(loginData);
     }
 
     const submitHandler= (event)=>{
@@ -32,10 +31,12 @@ const LoginForm = ({setIsLoggedIn}) => {
             accountType
         }))
 
-        setIsLoggedIn((prev)=>({
-            ...prev,
-            loginData,
-        }))
+        // reset the form again
+        setLoginData({
+             email:"",
+             password:""
+        });
+        setAccountType(ACCOUNT_TYPE.STUDENT);
     }
 
   return (
@@ -45,17 +46,17 @@ const LoginForm = ({setIsLoggedIn}) => {
         justify-around  rounded-full'>
 
             <button
-            className= {`py-1  px-4  rounded-full   ${accountType === "Student" ? (" bg-richblack-800  text-richblack-5 ") : ("")}`}
-            onClick={()=>setAccountType("Student")}
+            className= {`py-1  px-4  rounded-full   ${accountType === ACCOUNT_TYPE.STUDENT ? (" bg-richblack-800  text-richblack-5 ") : ("")}`}
+            onClick={()=>setAccountType(ACCOUNT_TYPE.STUDENT)}
             >
-                Student
+                {ACCOUNT_TYPE.STUDENT}
             </button>
             
             <button
-            className={`py-1  px-4  rounded-full   ${accountType === "Instructor" ? (" bg-richblack-800  text-richblack-5 ") : ("")}`}
-            onClick={()=>setAccountType("Instructor")}
+            className={`py-1  px-4  rounded-full   ${accountType === ACCOUNT_TYPE.INSTRUCTOR ? (" bg-richblack-800  text-richblack-5 ") : ("")}`}
+            onClick={()=>setAccountType(ACCOUNT_TYPE.INSTRUCTOR)}
             >
-                Instructor
+                {ACCOUNT_TYPE.INSTRUCTOR}
             </button>
 
         </div>

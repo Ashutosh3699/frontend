@@ -5,6 +5,7 @@ import { endpoints } from "../apis";
 
 const {SEND_OTP_API} = endpoints;
 
+// sendotp done --> 
 export function sendOTP(email,navigate){
     return async(dispatch) =>{
 
@@ -38,4 +39,21 @@ export function sendOTP(email,navigate){
         dispatch(setLoading(false));
         toast.dismiss(toastId);
     }
+}
+// sign up -->  function left**
+export function signup(
+    accountType,
+    firstName,
+    lastName,
+    email,
+    password,
+    confirmPassword,
+    otp,
+    navigate
+){
+
+}
+// login function --> left**
+export function login(){
+
 }
