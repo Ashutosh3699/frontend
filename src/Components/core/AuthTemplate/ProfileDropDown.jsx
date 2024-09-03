@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useSelector } from 'react-redux';
-import image from "../../../assets/Logo/Logo-Small-Light.png"
+// import image from "../../../assets/Logo/Logo-Small-Light.png"
 import { Link } from 'react-router-dom';
 import useOutsideClick from '../../../custom-hook/useOutsideClick';
 
@@ -14,12 +14,7 @@ const ProfileDropDown = () => {
   const divref = useRef(null);
   const handleClickOutside = () => {
     // function to be added
-    if(attributeclass === "invisible opacity-0"){
-      setattributeClass("visible opacity-100");
-    }
-    else{
-      setattributeClass("invisible opacity-0");
-    }
+    setattributeClass("invisible opacity-0");
   };
   useOutsideClick(divref, handleClickOutside);
 
@@ -40,7 +35,8 @@ const ProfileDropDown = () => {
     onClick={clickHandler}
     ref={divref}
     >
-      <img  src={image} alt='profileimage' className='w-full h-full object-contain '   />
+    {/* changes here */}
+      <img  src={user.imageUrl} alt='profileimage' className='w-full h-full object-contain '   />
 
       <div  
       className={`${attributeclass} absolute -left-32 top-[160%] flex flex-col justify-center items-center rounded-md

@@ -8,44 +8,33 @@ import { FaChevronDown, FaShoppingCart  } from "react-icons/fa";
 import ProfileDropDown from '../core/AuthTemplate/ProfileDropDown';
 import { apiConnector } from '../../services/apiConnector';
 import { categories } from '../../services/apis';
-
-
-const subLinks = [
-  {
-    title: "python",
-    path: "/catalog/python",
-  },
-  {
-    title: "web-development",
-    path: "/catalog/web-development",
-  }
-]
+// import cart from "../../features/cartSlice"
 
 const Navbar = () => {
 
     const {token} = useSelector((state) => state.auth);
     const {user} = useSelector((state) => state.profile);
-    const {cart} = useSelector((state) => state.cart);
+    const cart = useSelector((state) => state.cart);
 
-    console.log("url is : " , process.env.REACT_APP_BASE_URL);
+    const [subLinks, setSubLinks] = useState([]);
 
-    // const [subLinks, setSubLinks] = useState([]);
+    const fetchSubLinks = async()=>{
 
-    // const fetchSubLinks = async()=>{
+      try {
 
-    //   try {
+        const result = await apiConnector("GET", categories.CATEGORY_API);
+        setSubLinks(result.data.data);
+        
 
-    //     const result = await apiConnector("GET", categories.CATEGORY_API);
-    //     console.log(result);
-    //   } catch (error) {
-    //     console.log("Error at fetching the sublinks from catalog")
-    //   }
-    // }
+      } catch (error) {
+        console.log("Error at fetching the sublinks from catalog")
+      }
+    }
 
-    // useEffect(() => {
-
-    //   fetchSubLinks();
-    // }, [])
+    useEffect(() => {
+      fetchSubLinks();
+    }, [])
+    console.log(subLinks);
     // console.log(" url is : ", process.env.REACT_APP_BASE_URL);
     
     const location = useLocation();
@@ -85,9 +74,9 @@ const Navbar = () => {
                                       subLinks.length ? 
                                       (
                                        subLinks.map((item,index) => (
-                                        <Link  to={item.path}  key={index}  className=' uppercase hover:bg-richblack-50 rounded-md w-[95%] flex 
+                                        <Link  to={`/catalog/${item.categoryName}`}  key={index}  className=' uppercase hover:bg-richblack-50 rounded-md w-[95%] flex 
                                         justify-center items-center'>
-                                          {item.title}
+                                          {item.categoryName}
                                         </Link>
                                        ))
                                       ) : 
@@ -116,8 +105,9 @@ const Navbar = () => {
         <div  className='flex flex-row gap-4 items-center'>
           {
             user && user.accoutType !== "Instructor" && (
-              <div className='relative'>
+              <div className='relative  flex flex-row gap-1  items-center'>
                 <FaShoppingCart />
+                <div>{cart.totalItems}</div>
               </div>
             )
           }
@@ -142,7 +132,7 @@ const Navbar = () => {
             )
           }
           {
-            token  === null && (
+            token  !== null && (
               <div>
                 <ProfileDropDown/>
               </div>
