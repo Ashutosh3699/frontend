@@ -34,7 +34,7 @@ const Navbar = () => {
     useEffect(() => {
       fetchSubLinks();
     }, [])
-    console.log(subLinks);
+    // console.log(subLinks);
     // console.log(" url is : ", process.env.REACT_APP_BASE_URL);
     
     const location = useLocation();

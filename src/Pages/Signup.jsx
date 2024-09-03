@@ -12,7 +12,6 @@ const Signup = ({setIsLoggedIn}) => {
           desc2="Education to future-proof your career."
           image={signupImg}
           formType="signup"
-          setIsLoggedIn={setIsLoggedIn}
         />
 
         <Footer/>

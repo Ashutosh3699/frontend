@@ -3,6 +3,6 @@ const contactUsRouter = express.Router();
 
 const {contactUs} = require("../controllers/ContactUs");
 
-contactUsRouter.post("/contactUs", contactUs);
+contactUsRouter.post("/contactUsrouter", contactUs);
 
 module.exports = contactUsRouter

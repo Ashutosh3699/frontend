@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { IoEye, IoEyeOff  } from "react-icons/io5";
 import { FaStarOfLife } from "react-icons/fa";
+import { toast } from "react-hot-toast";
+import {ACCOUNT_TYPE}  from "../../../utils/constant";
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {setsignupData} from "../../../features/authSlice";
+import {sendOTP} from "../../../services/operations/authApi"
 
 
 const SignupForm = () => {
 
-  const [accountType, setAccountType] = useState("Student");
+  const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT);
     const [showPass, setShowPass] = useState(false);
     const [signupData, setSignupData] = useState({
         firstName:"",
@@ -15,14 +21,14 @@ const SignupForm = () => {
         confirmPassword:""
     });
 
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const changeHandler= (event)=>{
-
       setSignupData((prev)=>({
             ...prev,
             [event.target.name]: event.target.value
         }))
-
         // console.log(signupData);
     }
 
@@ -31,7 +37,8 @@ const SignupForm = () => {
         event.preventDefault();
 
         if(signupData.confirmPassword !== signupData.password){
-          console.log("password is not correct");
+            toast.error("Passwords Do Not Match")
+            return
         }
         else{
           setSignupData((prev)=>({
@@ -39,7 +46,22 @@ const SignupForm = () => {
               accountType
           }))
         }
+
+        // console.log("signupdata is : ", signupData);
+
+        dispatch(setsignupData(signupData));
         
+        // send otp 
+        dispatch(sendOTP(signupData.email, navigate));
+        // Reset
+        setSignupData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+        })
+        setAccountType(ACCOUNT_TYPE.STUDENT);
     }
 
     // console.log(signupData);
@@ -51,17 +73,17 @@ const SignupForm = () => {
       justify-around  rounded-full'>
 
           <button
-          className= {`py-1  px-4  rounded-full   ${accountType === "Student" ? (" bg-richblack-800  text-richblack-5 ") : ("")}`}
-          onClick={()=>setAccountType("Student")}
+          className= {`py-1  px-4  rounded-full   ${accountType === ACCOUNT_TYPE.STUDENT ? (" bg-richblack-800  text-richblack-5 ") : ("")}`}
+          onClick={()=>setAccountType(ACCOUNT_TYPE.STUDENT)}
           >
-              Student
+              {ACCOUNT_TYPE.STUDENT}
           </button>
           
           <button
-          className={`py-1  px-4  rounded-full   ${accountType === "Instructor" ? (" bg-richblack-800  text-richblack-5 ") : ("")}`}
-          onClick={()=>setAccountType("Instructor")}
+          className={`py-1  px-4  rounded-full   ${accountType === ACCOUNT_TYPE.INSTRUCTOR ? (" bg-richblack-800  text-richblack-5 ") : ("")}`}
+          onClick={()=>setAccountType(ACCOUNT_TYPE.INSTRUCTOR)}
           >
-              Instructor
+              {ACCOUNT_TYPE.INSTRUCTOR}
           </button>
 
       </div>

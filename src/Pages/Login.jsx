@@ -12,7 +12,6 @@ const Login = ({setIsLoggedIn}) => {
           desc2="Education to future-proof your career."
           image={loginImg}
           formType="login"
-          setIsLoggedIn={setIsLoggedIn}
         />
 
         <Footer/>
