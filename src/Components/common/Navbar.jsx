@@ -76,10 +76,25 @@ const Navbar = () => {
 
                                 <div  className=' invisible absolute  -left-44  top-[160%] flex flex-col justify-center items-center rounded-md
                                    bg-richblack-5  p-4  text-richblack-800 opacity-0  duration-400  transition-all
-                                   group-hover:visible  group-hover:opacity-100  lg:w-[300px]'>
+                                   group-hover:visible  group-hover:opacity-100  lg:w-[300px]  z-10  gap-2'>
 
                                    <div className='absolute w-6 h-6 bg-richblack-5  rounded-md rotate-45 
-                                    -top-2  right-10'></div>
+                                    -top-2  right-10 z-0'></div>
+
+                                    {
+                                      subLinks.length ? 
+                                      (
+                                       subLinks.map((item,index) => (
+                                        <Link  to={item.path}  key={index}  className=' uppercase hover:bg-richblack-50 rounded-md w-[95%] flex 
+                                        justify-center items-center'>
+                                          {item.title}
+                                        </Link>
+                                       ))
+                                      ) : 
+                                      (
+                                        <div></div>
+                                      )
+                                    }
 
                                 </div>
 
@@ -127,7 +142,7 @@ const Navbar = () => {
             )
           }
           {
-            token  !== null && (
+            token  === null && (
               <div>
                 <ProfileDropDown/>
               </div>
