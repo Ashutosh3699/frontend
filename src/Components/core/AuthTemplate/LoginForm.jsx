@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { IoEye, IoEyeOff  } from "react-icons/io5";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaStarOfLife } from "react-icons/fa";
 import {ACCOUNT_TYPE} from "../../../utils/constant"
+import { useDispatch } from 'react-redux';
+import {login} from "../../../services/operations/authApi"
 
 const LoginForm = () => {
 
@@ -13,6 +15,8 @@ const LoginForm = () => {
         password:""
     });
 
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const changeHandler= (event)=>{
 
@@ -25,12 +29,13 @@ const LoginForm = () => {
     const submitHandler= (event)=>{
 
         event.preventDefault();
-
         setLoginData((prev)=>({
             ...prev,
             accountType
-        }))
+        }));
 
+        const {email,password} = loginData;
+        dispatch(login(email,password,navigate));
         // reset the form again
         setLoginData({
              email:"",

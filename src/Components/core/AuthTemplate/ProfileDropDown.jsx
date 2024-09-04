@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react'
-import { useSelector } from 'react-redux';
-// import image from "../../../assets/Logo/Logo-Small-Light.png"
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { VscDashboard, VscSignOut } from "react-icons/vsc"
+import { Link, useNavigate } from 'react-router-dom';
 import useOutsideClick from '../../../custom-hook/useOutsideClick';
+import {logout} from "../../../services/operations/authApi"
 
 const ProfileDropDown = () => {
 
@@ -28,6 +29,8 @@ const ProfileDropDown = () => {
   }
 
   // logout wala scene baki hai 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // console.log("attributeclass", attributeclass);
 
@@ -38,7 +41,10 @@ const ProfileDropDown = () => {
     ref={divref}
     >
     {/* changes here */}
-      <img  src={user.imageUrl} alt='profileimage' className='w-full h-full object-contain '   />
+      <img  src={user?.imageUrl} 
+      alt={`profile-img-${user?.imageUrl}`} 
+      className='w-full h-full object-contain ' 
+      />
 
       <div  
       className={`${attributeclass} absolute -left-32 top-[160%] flex flex-col justify-center items-center rounded-md
@@ -48,16 +54,22 @@ const ProfileDropDown = () => {
             <div className='absolute w-6 h-6 bg-richblack-5  rounded-md rotate-45 
             -top-2  right-10 z-0'></div>
 
-            <Link  to={"/dashboard"}>
+            <Link  to={"/dashboard/my-profile"}>
+            <div className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25">
+              <VscDashboard className="text-lg" />
               Dashboard
+            </div>
             </Link>
 
-            <Link to={"/"}>
-                <button className='px-3 py-1 bg-blue-100 text-richblack-600 border border-richblack-700 
-                 hover:scale-95 rounded-md text-center  transition-all duration-200 w-full'>
-                  Logout
-                </button>
-            </Link>
+            <div
+            onClick={() => {
+              dispatch(logout(navigate))
+            }}
+            className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25"
+          >
+            <VscSignOut className="text-lg" />
+            Logout
+          </div>
 
                                     
 

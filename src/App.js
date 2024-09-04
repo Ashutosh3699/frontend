@@ -4,6 +4,7 @@ import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Navbar from "./Components/common/Navbar";
+import OpenRoute from "./Components/core/AuthTemplate/OpenRoute";
 
 function App() {
 
@@ -12,9 +13,32 @@ function App() {
       <Navbar/>
      {
       <Routes>
-          <Route  path="/" element={<Home/>}  />
-          <Route  path="/signup" element={<Signup />}  />
-          <Route  path="/login" element={<Login />}  />
+
+          <Route  
+          path="/" 
+          element={
+            <OpenRoute>
+              <Home/>
+            </OpenRoute>
+          }  
+          />
+          <Route  
+          path="/login" 
+          element={
+            <OpenRoute>
+              <Login/>
+            </OpenRoute>
+          }  
+          />
+           <Route  
+          path="/signup" 
+          element={
+            <OpenRoute>
+              <Signup/>
+            </OpenRoute>
+          }  
+          />
+
       </Routes>
 
      }
