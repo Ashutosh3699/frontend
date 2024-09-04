@@ -5,6 +5,7 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Navbar from "./Components/common/Navbar";
 import OpenRoute from "./Components/core/AuthTemplate/OpenRoute";
+import ForgotPassword from "./Components/core/AuthTemplate/ForgotPassword";
 
 function App() {
 
@@ -35,6 +36,14 @@ function App() {
           element={
             <OpenRoute>
               <Signup/>
+            </OpenRoute>
+          }  
+          />
+          <Route  
+          path="/forgotPassword" 
+          element={
+            <OpenRoute>
+              <ForgotPassword/>
             </OpenRoute>
           }  
           />

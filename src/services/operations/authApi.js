@@ -5,7 +5,7 @@ import {resetCart} from "../../features/cartSlice"
 import {apiConnector} from "../apiConnector";
 import { endpoints } from "../apis";
 
-const {SEND_OTP_API, SIGNUP_API, LOGIN_API} = endpoints;
+const {SEND_OTP_API, SIGNUP_API, LOGIN_API, RESETPASSTOKEN_API, RESETPASSWORD_API} = endpoints;
 
 // sendotp done --> 
 export function sendOTP(email,navigate){
@@ -135,3 +135,29 @@ export function logout(navigate) {
       navigate("/")
     }
   }
+
+export function getResetToken(email,setResetToken){
+    return async(dispatch)=>{
+        const toastId = toast.loading("loading");
+        dispatch(setLoading(true));
+
+        try {
+            
+            const response = await apiConnector("POST", RESETPASSTOKEN_API, {email});
+
+            console.log("respons after get reset token is: ", response);
+
+            if(!response.data.success){
+                throw new Error(response.data.success);
+            }
+
+            setResetToken(true);
+            toast.success("Email sent successfully");
+        } catch (error) {
+            console.log("Get reset token: ", error);
+            toast.error("Failed while sending email");
+        }
+        dispatch(setLoading(false));
+        toast.dismiss(toastId);
+    }
+}

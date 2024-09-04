@@ -112,7 +112,7 @@ const LoginForm = () => {
                   
                 </div>
 
-                <Link  to={"forgotPass"}  className='text-xs text-blue-100 pl-3'>
+                <Link  to={"/forgotPassword"}  className='text-xs text-blue-100 pl-3'>
                     forgot password
                 </Link>
             </div>

@@ -132,7 +132,7 @@ const Navbar = () => {
             )
           }
           {
-            token  === null && (
+            token  !== null && (
               <div>
                 <ProfileDropDown/>
               </div>

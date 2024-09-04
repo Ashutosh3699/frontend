@@ -99,7 +99,7 @@ exports.signUp =  async(req,res) =>{
         }
         // bring the otp from db and check the otp is correct while entering
         const otpDb = await OTP.find({email}).sort({ createdAt: -1 }).limit(1);;
-        console.log(otpDb);
+        console.log("otpDb", otpDb);
         if (otpDb.length === 0) {
 			// OTP not found for the email
 			return res.status(400).json({
