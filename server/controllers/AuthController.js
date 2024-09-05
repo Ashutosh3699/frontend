@@ -74,6 +74,7 @@ exports.sendOtp = async(req,res)=>{
 exports.signUp =  async(req,res) =>{
     try {
         // fetch data 
+        console.log("signup data is:",req.body);
         const {email, password, confirmPassword, firstName, lastName, accountType, contactNumber, otp} = req.body
         // validate the data
         if(!email || !password || !confirmPassword || !firstName || !lastName || !otp){
@@ -87,7 +88,7 @@ exports.signUp =  async(req,res) =>{
         if(userExist){
             return res.status(401).json({
                 success:false,
-                message: "Data is incomplete, please fill all the data"
+                message: "User is already exist, please fill all the data"
             })
         }
         // check the password is correct

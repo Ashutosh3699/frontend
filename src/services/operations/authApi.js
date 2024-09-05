@@ -108,9 +108,9 @@ export function login(email,password,navigate){
 
             dispatch(setToken(response.data.token));
             // take the user image for dashboard
-            const userImage = response.data?.user?.image ?
+            const userImage = response.data?.data?.user?.image ?
             response.data.user.image
-             : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`;
+             : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.data.user?.firstName} ${response.data.data.user?.lastName}`;
 
             dispatch(setUser({...response.data.user, image: userImage}));
             navigate("/dashboard/my-profile")
@@ -156,6 +156,30 @@ export function getResetToken(email,setResetToken){
         } catch (error) {
             console.log("Get reset token: ", error);
             toast.error("Failed while sending email");
+        }
+        dispatch(setLoading(false));
+        toast.dismiss(toastId);
+    }
+}
+
+export function getResetPassword(password,confirmPassword,token, navigate){
+    return async(dispatch)=>{
+        const toastId = toast.loading("loading");
+        dispatch(setLoading(true));
+
+        try {
+            const response = await apiConnector("POST", RESETPASSWORD_API, {password,confirmPassword,token});
+            console.log("response after reset password is: ", response);
+
+            if(!response.data.success){
+                throw new Error(response.data.success);
+            }
+
+            navigate("/reset-completed")
+            toast.success("reset password successfully");
+        } catch (error) {
+            console.log("Get reset password: ", error);
+            toast.error("Fail reseting password");
         }
         dispatch(setLoading(false));
         toast.dismiss(toastId);

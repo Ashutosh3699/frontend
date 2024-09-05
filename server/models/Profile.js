@@ -4,7 +4,6 @@ const profileSchema = new  mongoose.Schema({
 
     phoneNumber: {
         type:String,
-        required:true
     },
     gender: {
         type:String,

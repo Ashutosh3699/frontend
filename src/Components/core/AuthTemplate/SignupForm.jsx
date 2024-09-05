@@ -33,23 +33,22 @@ const SignupForm = () => {
     }
 
     const submitHandler= (event)=>{
-
         event.preventDefault();
 
         if(signupData.confirmPassword !== signupData.password){
             toast.error("Passwords Do Not Match")
             return
         }
-        else{
-          setSignupData((prev)=>({
-              ...prev,
+        
+        const signupdata = {
+             ...signupData,
               accountType
-          }))
-        }
+          }
+        
 
         // console.log("signupdata is : ", signupData);
 
-        dispatch(setsignupData(signupData));
+        dispatch(setsignupData(signupdata));
         
         // send otp 
         dispatch(sendOTP(signupData.email, navigate));

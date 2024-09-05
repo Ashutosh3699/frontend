@@ -35,7 +35,7 @@ exports.resetPasswordToken = async(req,res) =>{
             },{new:true}
         )
         // create url
-            const url = `http://localhost:4000/update-password/${token}`
+            const url = `http://localhost:3000/update-password/${token}`
         // send the url to the user email
             await mailsender(email,"Link for forgot password" , `Password Reset Link: ${url}`);
 
