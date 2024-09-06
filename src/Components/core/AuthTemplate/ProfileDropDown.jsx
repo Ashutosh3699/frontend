@@ -9,6 +9,7 @@ const ProfileDropDown = () => {
 
   // fetch the profile from profileSlice
   const  {user} = useSelector((state) => state.profile);
+  console.log("user is: ", user);
 
   const [attributeclass,setattributeClass] = useState("invisible opacity-0");
 
@@ -41,9 +42,9 @@ const ProfileDropDown = () => {
     ref={divref}
     >
     {/* changes here */}
-      <img  src={user?.imageUrl} 
-      alt={`profile-img-${user?.imageUrl}`} 
-      className='w-full h-full object-contain ' 
+      <img  src={user?.image} 
+      alt={`profile-img-${user?.image}`} 
+      className='w-full h-full object-contain  overflow-hidden' 
       />
 
       <div  

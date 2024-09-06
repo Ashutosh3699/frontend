@@ -108,11 +108,11 @@ export function login(email,password,navigate){
 
             dispatch(setToken(response.data.token));
             // take the user image for dashboard
-            const userImage = response.data?.data?.user?.image ?
-            response.data.user.image
-             : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.data.user?.firstName} ${response.data.data.user?.lastName}`;
+            const userImage = response.data?.data?.image ?
+            response.data.data.image
+             : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.data?.firstName} ${response.data.data?.lastName}`;
 
-            dispatch(setUser({...response.data.user, image: userImage}));
+            dispatch(setUser({...response.data.data, image: userImage}));
             navigate("/dashboard/my-profile")
         } catch (error) {
             toast.error("login is failed while process..");

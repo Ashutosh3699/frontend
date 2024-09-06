@@ -13,9 +13,10 @@ export const authslice = createSlice({
     name: "auth",
     initialState:initialState,
     reducers:  {
-        setToken: (state, action)=>{
+        setToken: (state, value)=>{
 
-            state.token = action.payload;
+            state.token = value.payload;
+            localStorage.setItem("token", JSON.stringify(state.token))
         },
         setsignupData(state, value) {
             state.signupData = value.payload;
