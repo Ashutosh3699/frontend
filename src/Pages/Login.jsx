@@ -3,7 +3,7 @@ import Template from '../Components/core/AuthTemplate/Template'
 import loginImg from "../assets/Images/login.webp"
 import Footer from '../Components/common/footer/Footer'
 
-const Login = ({setIsLoggedIn}) => {
+const Login = () => {
   return (
     <div  className=' bg-richblack-900  w-full h-full pt-8'>
         <Template

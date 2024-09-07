@@ -10,6 +10,7 @@ import UpdatePassword from "./Components/core/AuthTemplate/UpdatePassword";
 import ResetComplete from "./Components/core/AuthTemplate/ResetComplete";
 import VerifyEmail from "./Components/core/AuthTemplate/VerifyEmail";
 import AboutUs from "./Pages/AboutUs";
+import ContactUsPage from "./Pages/ContactUsPage";
 
 function App() {
 
@@ -83,6 +84,13 @@ function App() {
             path="/about-us"
             element={
               <AboutUs/>
+            }
+          />
+
+          <Route
+            path="/contact"
+            element={
+              <ContactUsPage/>
             }
           />
 

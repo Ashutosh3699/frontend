@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { getResetToken } from '../../../services/operations/authApi';
+import Loading from '../../common/loader/Loading';
 
 const ForgotPassword = () => {
 
@@ -23,7 +24,7 @@ const ForgotPassword = () => {
     <div className='w-full h-screen  bg-richblack-900 text-richblack-5  flex flex-col  justify-center items-center gap-y-3'>
         {
             loading ?
-            (<div>loading</div>) : 
+            (<Loading/>) : 
             ( <div className='flex flex-col gap-3 items-center lg:w-[50%]  w-[95%]'>
                 {
                     !resetToken ? (

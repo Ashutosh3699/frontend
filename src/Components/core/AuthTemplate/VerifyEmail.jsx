@@ -3,6 +3,7 @@ import OtpInput from 'react-otp-input';
 import { useDispatch, useSelector } from 'react-redux';
 import { signup } from '../../../services/operations/authApi';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../../common/loader/Loading';
 
 const VerifyEmail = () => {
 
@@ -10,7 +11,7 @@ const VerifyEmail = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const {signupData} = useSelector((state)=>state.auth);
+    const {signupData, loading} = useSelector((state)=>state.auth);
 
     useEffect(()=>{
 
@@ -30,27 +31,40 @@ const VerifyEmail = () => {
     }
 
   return (
-    <div className='w-full h-screen bg-richblack-900 text-richblack-5 flex flex-col'>
+    <div className='w-full h-screen bg-richblack-900 text-richblack-5 flex flex-col items-center justify-center gap-6'>
 
-        <h1>Verify Email</h1>
-        <p>A verification code sent to your email. Enter the code below:</p>
+       {
+        loading ? (<Loading/>) : (
+            <div>
+                <h1 className='text-3xl  text-blue-100  font-bold'>Verify Email</h1>
+                <p className='text-richblack-50  font-edu-sa text-md'>A verification code sent to your email. Enter the code below:</p>
 
-        <form  onSubmit={submitHandler}>
+                <form  onSubmit={submitHandler} className='text-richblack-50'>
 
-            {/* otp - input */}
-            <OtpInput
-                value={otp}
-                onChange={setOtp}
-                numInputs={6}
-                renderSeparator={<span>-</span>}
-                renderInput={(props) => <input {...props} className='p-4 bg-richblack-700  font-bold text-xl' />}
-             />
+                    <OtpInput
+                        value={otp}
+                        onChange={setOtp}
+                        numInputs={6}
+                        renderSeparator={<span>-</span>}
+                        renderInput={(props) => <input
+                        {...props} 
+                        style={{
+                            boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                        }}
+                        className="w-[48px] lg:w-[60px] border-0 bg-richblack-800 rounded-[0.5rem] text-richblack-5 aspect-square text-center focus:border-0 focus:outline-2
+                        focus:outline-yellow-50"/>}
+                    />
 
-            {/* button */}
-            <button type='submit'>
-                Verify mail
-            </button>
-        </form>
+                    {/* button */}
+                    <button 
+                    type="submit"
+                    className="w-full bg-yellow-50 py-[12px] px-[12px] rounded-[8px] mt-6 font-medium text-richblack-900">
+                        Verify mail
+                    </button>
+                </form>
+            </div>
+        )
+       }
     
     </div>
   )

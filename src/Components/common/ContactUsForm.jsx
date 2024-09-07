@@ -2,7 +2,8 @@ import React, { useState,useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import {contact_us} from "../../services/apis";
 import {apiConnector} from "../../services/apiConnector";
-import CountryCode from "../../data/countrycode.json"
+import CountryCode from "../../data/countrycode.json";
+import Loading from "../common/loader/Loading"
 
 const ContactUsForm = () => {
 
@@ -16,12 +17,10 @@ const ContactUsForm = () => {
 
      const submitContactForm = async(data)=>{
 
-        console.log("logging data : ", data);
+        // console.log("logging data : ", data);
         try{
             setLoading(true);
             const response = await apiConnector("POST", contact_us.CONTACT_US_API, data);
-            // const response = {status:"OK"};
-            console.log("Logging response", response);
             setLoading(false);
         }
         catch(error) {
@@ -47,7 +46,7 @@ const ContactUsForm = () => {
   return (
     <div>
         {
-            loading ? (<div>loading</div>) : (
+            loading ? (<Loading/>) : (
                 <form onSubmit={handleSubmit(submitContactForm)}>
                     <div className='flex flex-col gap-4 items-start justify-between '>
 
