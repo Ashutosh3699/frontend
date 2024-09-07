@@ -15,7 +15,7 @@ exports.contactUs = async(req,res)=>{
             })
         }
         // send  mail to admin
-        const senToAdmin = await mailsender(process.env.MAIL_USER, 
+        const senToAdmin = await mailsender(process.env.MAIL_EMAIL, 
             `Customer have  Query!! please listen to ${firstName} ${lastName}`,  
             `Customer Name: ${firstName}  ${lastName}
                 Customer Phone Number: ${contactNumber}
@@ -29,8 +29,7 @@ exports.contactUs = async(req,res)=>{
         return res.status(200).json({
             success:true,
             message: "Contact us data has been send successfully",
-            data:{
-                senToAdmin,
+            data: {senToAdmin,
                 sentToUser
             }
         })

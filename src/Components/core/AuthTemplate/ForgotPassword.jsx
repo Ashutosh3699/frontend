@@ -24,30 +24,31 @@ const ForgotPassword = () => {
         {
             loading ?
             (<div>loading</div>) : 
-            ( <div>
+            ( <div className='flex flex-col gap-3 items-center lg:w-[50%]  w-[95%]'>
                 {
                     !resetToken ? (
-                        <div>Reset Your Password</div>
+                        <div className='text-4xl font-semibold text-blue-100 '>Reset Your Password</div>
                     ) : (
-                        <div>
+                        <div className='text-4xl font-semibold text-blue-100 '>
                             Check Your Email
                         </div>
                     )
                 }
                 {
                     !resetToken ? (
-                        <div>Have no fear. We'll email you instructions to reset your password. If you dont have access to your email we can try account recovery</div>
+                        <div className='text-lg font-medium text-richblack-200 text-center font-edu-sa  my-2'>Have no fear. We'll email you instructions to reset your password. If you dont have access to your email we can try account recovery</div>
                     ) : (
-                        <div>We have sent the reset email to {`${email}`}</div>
+                        <div className='text-lg font-medium text-richblack-200 text-center font-edu-sa  my-2'>We have sent the reset email to {`${email}`}</div>
                     )
                 }
         
                 <form
                 onSubmit={submitHandler}
+                className='flex flex-col gap-10 items-center'
                 >
                     {
-                        !resetToken && <label>
-                            <p>Email Address <span><sup>*</sup></span></p>
+                        !resetToken && <label className='w-full text-xl font-inter text-richblack-50  flex flex-col items-start gap-2'>
+                            <p className='font-edu-sa'>Email Address <span><sup className=' text-blue-200'>*</sup></span></p>
         
                             <input
                                 required
@@ -55,6 +56,8 @@ const ForgotPassword = () => {
                                 placeholder='Enter Email Address'
                                 name='email'
                                 id='email'
+                               className='p-2  text-richblack-50 bg-richblack-800  text-md 
+                                rounded-lg border border-richblack-400  shadow-richblack-400 shadow-inner '
                                 onChange={(e)=>setEmail( e.target.value )}
                                 value={email}
                             />
@@ -69,7 +72,7 @@ const ForgotPassword = () => {
                 
                 </form>
         
-                <div>
+                <div className='text-sm font-light text-blue-100 '>
                         <Link to={"/login"}>
                             back to login
                         </Link>

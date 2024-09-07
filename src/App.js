@@ -9,6 +9,7 @@ import ForgotPassword from "./Components/core/AuthTemplate/ForgotPassword";
 import UpdatePassword from "./Components/core/AuthTemplate/UpdatePassword";
 import ResetComplete from "./Components/core/AuthTemplate/ResetComplete";
 import VerifyEmail from "./Components/core/AuthTemplate/VerifyEmail";
+import AboutUs from "./Pages/AboutUs";
 
 function App() {
 
@@ -75,6 +76,14 @@ function App() {
                 <ResetComplete/>
               </OpenRoute>
             }  
+          />
+
+
+          <Route
+            path="/about-us"
+            element={
+              <AboutUs/>
+            }
           />
 
       </Routes>

@@ -35,8 +35,8 @@ const Navbar = () => {
       fetchSubLinks();
     }, [])
     
-    console.log("token is : ", token);
-    console.log("token is at local storage : ", localStorage);
+    // console.log("token is : ", token);
+    // console.log("token is at local storage : ", localStorage);
     // console.log(" url is : ", process.env.REACT_APP_BASE_URL);
     
     const location = useLocation();

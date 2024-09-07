@@ -38,21 +38,24 @@ const UpdatePassword = () => {
     }
 
   return (
-    <div className=''>
+    <div className='w-full h-screen bg-richblack-900 flex flex-col items-center justify-center gap-6 text-richblack-25'>
     
-        <h3>Choose Your New Password </h3>
-        <p>Almost done. Enter your new password and youre all set. </p>
+        <h3 className='text-3xl text-blue-100 font-semibold'>Choose Your New Password </h3>
+        <p className='text-md text-richblack-100  font-edu-sa'>Almost done. Enter your new password and youre all set. </p>
 
-        <form  onSubmit={submitHandler}>
-            <label>
-                <h4> New Password<span><sup>*</sup></span> </h4>
+        <form  onSubmit={submitHandler} className='flex flex-col gap-3 items-start'>
+            <label  className='w-full text-xl font-inter text-richblack-50  flex flex-col items-start gap-2'>
+                <h4 className='font-edu-sa'> New Password<span><sup className=' text-blue-200'>*</sup></span> </h4>
                 <input
                     id='password'
                     name='password'
+                    placeholder='Enter Password'
                     type={showPass ? "text" : "password"}
                     value={formData.password}
                     required
                     onChange={changeHandler}
+                     className='p-2  text-richblack-50 bg-richblack-800  text-md 
+                        rounded-lg border border-richblack-400  shadow-richblack-400 shadow-inner '
                 />
                 <span  onClick={()=>setShowPass((prev)=>(!prev))}>
                     {
@@ -61,15 +64,18 @@ const UpdatePassword = () => {
                 </span>
             </label>
 
-            <label>
-                <h4> Confirm Password<span><sup>*</sup></span> </h4>
+            <label className='w-full text-xl font-inter text-richblack-50  flex flex-col items-start gap-2'>
+                <h4 className='font-edu-sa'> Confirm Password<span><sup className=' text-blue-200'>*</sup></span> </h4>
                 <input
                     id='confirmPassword'
                     name='confirmPassword'
+                    placeholder='Enter Password'
                     type={showConfirmPass ? "text" : "password"}
                     value={formData.confirmPassword}
                     required
                     onChange={changeHandler}
+                     className='p-2  text-richblack-50 bg-richblack-800  text-md 
+                                rounded-lg border border-richblack-400  shadow-richblack-400 shadow-inner '
                 />
                 <span  onClick={()=>setShowConfirmPass((prev)=>(!prev))}>
                     {
