@@ -9,7 +9,7 @@ const ProfileDropDown = () => {
 
   // fetch the profile from profileSlice
   const  {user} = useSelector((state) => state.profile);
-  console.log("user is: ", user);
+  // console.log("user is: ", user);
 
   const [attributeclass,setattributeClass] = useState("invisible opacity-0");
 

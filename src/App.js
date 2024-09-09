@@ -11,6 +11,10 @@ import ResetComplete from "./Components/core/AuthTemplate/ResetComplete";
 import VerifyEmail from "./Components/core/AuthTemplate/VerifyEmail";
 import AboutUs from "./Pages/AboutUs";
 import ContactUsPage from "./Pages/ContactUsPage";
+import Dashboard from "./Pages/Dashboard";
+import MyProfile from "./Pages/MyProfile";
+import Error from "./Pages/Error"
+import PrivateRoute from "./Components/core/AuthTemplate/PrivateRoute";
 
 function App() {
 
@@ -23,9 +27,7 @@ function App() {
           <Route  
           path="/" 
           element={
-            <OpenRoute>
               <Home/>
-            </OpenRoute>
           }  
           />
           <Route  
@@ -93,6 +95,18 @@ function App() {
               <ContactUsPage/>
             }
           />
+
+          <Route
+          element={<PrivateRoute>
+            <Dashboard/>
+          </PrivateRoute>}
+          >
+            <Route path="/dashboard/my-profile"
+            element={<MyProfile/>}/>
+
+          </Route>
+
+          <Route path="*" element={<Error/>}/>
 
       </Routes>
 

@@ -22,8 +22,8 @@ export function sendOTP(email,navigate){
                 checkUserPresent:true,
             });
 
-            console.log("Response after sending otp: ", response);
-            console.log(response.data.success);
+            // console.log("Response after sending otp: ", response);
+            // console.log(response.data.success);
 
             if(!response.data.success){
                 throw new Error(response.data.success);
@@ -69,7 +69,7 @@ export function signup(
                 otp
             });
 
-            console.log("signup response is: ", response);
+            // console.log("signup response is: ", response);
 
             if(!response.data.success){
                 throw new Error(response.data.success);
@@ -98,7 +98,7 @@ export function login(email,password,navigate){
                 password
             });
 
-            console.log("login response is: ", response);
+            // console.log("login response is: ", response);
 
             if(!response.data.success){
                 throw new Error(response.data.success);
@@ -145,7 +145,7 @@ export function getResetToken(email,setResetToken){
             
             const response = await apiConnector("POST", RESETPASSTOKEN_API, {email});
 
-            console.log("respons after get reset token is: ", response);
+            // console.log("respons after get reset token is: ", response);
 
             if(!response.data.success){
                 throw new Error(response.data.success);
@@ -169,7 +169,7 @@ export function getResetPassword(password,confirmPassword,token, navigate){
 
         try {
             const response = await apiConnector("POST", RESETPASSWORD_API, {password,confirmPassword,token});
-            console.log("response after reset password is: ", response);
+            // console.log("response after reset password is: ", response);
 
             if(!response.data.success){
                 throw new Error(response.data.success);
