@@ -15,6 +15,7 @@ import Dashboard from "./Pages/Dashboard";
 import MyProfile from "./Pages/MyProfile";
 import Error from "./Pages/Error"
 import PrivateRoute from "./Components/core/AuthTemplate/PrivateRoute";
+import Settings from "./Pages/Settings";
 
 function App() {
 
@@ -103,6 +104,9 @@ function App() {
           >
             <Route path="/dashboard/my-profile"
             element={<MyProfile/>}/>
+
+          <Route path="/dashboard/settings"
+            element={<Settings/>}/>
 
           </Route>
 

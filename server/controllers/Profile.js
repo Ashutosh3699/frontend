@@ -2,6 +2,9 @@ const User = require("../models/User");
 const Profile = require("../models/Profile");
 const Courses = require("../models/Courses");
 const schedule = require('node-schedule');
+const { fileAndImageUploader } = require("../utils/imageUploader");
+
+require("dotenv").config();
 
 // updateProfile as we have created the profile while createUser
 exports.updateProfile = async(req,res)=>{
@@ -135,4 +138,55 @@ exports.getEnrolledCourses = async(req,res)=>{
 			message: error.message,
 		});
 	}
+}
+
+// update the photo
+exports.updateProfilePic = async(req,res)=>{
+
+    try {
+
+        const image = req.files.image;
+        console.log("image is : ", image);
+
+        if(!image){
+
+            res.status(401).json({
+                success:false,
+                error:error.message,
+                message:"image not  found"
+            })
+        }
+
+        const userId = req.user.id;
+        console.log("user id is: ", userId);
+
+        const imageUrl = await fileAndImageUploader(image,process.env.FOLDER_NAME);
+        console.log("image url is : ", imageUrl.secure_url);
+
+        if(!imageUrl){
+            return res.status(404).json({
+                success:false,
+                message: "Image uploading is not uploaded at 1"
+            });
+        }
+
+        const response = await User.findByIdAndUpdate(userId,
+            {
+                image:imageUrl.secure_url
+            },
+            {new:true}
+        );
+
+        return res.status(200).json({
+            success:true,
+            message:"Image uploaded successfully",
+            data:response
+        })
+        
+    } catch (error) {
+        return res.status(500).json({
+            success:false,
+            message: "Error occured, uploading the profile and not updated"
+        })
+    }
 }

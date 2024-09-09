@@ -3,7 +3,7 @@ require("dotenv").config();
 // authentication  for id
 exports.isAuth = async(req,res,next) =>{
     try {
-        const token =  req.cookies.token || req.body.token ||  req.header("Authorisation").replace("Bearer ", "");
+        const token =  req.cookies.token || req.body.token ||  req.header("Authorization").replace("Bearer ", "");
 
         if(!token || token===undefined){
 
