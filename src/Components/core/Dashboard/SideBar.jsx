@@ -25,7 +25,7 @@ const SideBar = () => {
     }
 
   return (
-    <div className='py-10  bg-richblack-800  flex flex-col   gap-4 border-r-[1px]  border-richblack-600 h-screen'>
+    <div className='py-10  bg-richblack-800  flex flex-col   gap-4 border-r-[1px]  border-richblack-600 h-full'>
 
         <div className='flex flex-col'>
             {

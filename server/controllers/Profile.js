@@ -13,16 +13,9 @@ exports.updateProfile = async(req,res)=>{
         // fetch the user id
         const user_id = req.user.id;
         // fetch the data from body
-        const {phoneNumber,gender,DOB="",aboutUser=""}   = req.body;
+        const {phoneNumber="",gender,DOB="",aboutUser=""}   = req.body;
         console.log("user_id", phoneNumber);
-        // check  the id and call out the db of user
-        if(!phoneNumber || !gender || !DOB || !aboutUser){
-
-            return res.status(400).json({
-                success:false,
-                message: "Enter the details properly"
-            });
-        }
+        
         // db call for user
         const userDetails = await User.findById(user_id);
         console.log("userDetails", userDetails);
@@ -33,7 +26,8 @@ exports.updateProfile = async(req,res)=>{
                 gender,
                 DOB,
                 aboutUser
-            }
+            },
+            {new:true}
         );
         // update the profile of the user
         // accountDetailsUser.phoneNumber= phoneNumber;
@@ -42,13 +36,15 @@ exports.updateProfile = async(req,res)=>{
         // accountDetailsUser.aboutUser = aboutUser;
 
         console.log("updated account details", accountDetailsUser);
+        userDetails.accountDetails = accountDetailsUser;
         // await accountDetailsUser.save();
         // console.log("updated");
         // return response
         return res.status(200).json({
             success:true,
             message: "account details are updated successfully",
-            accountDetailsUser,
+            data:userDetails
+           
         })
     } catch (error) {
         
@@ -79,6 +75,8 @@ exports.deleteProfile = async(req,res)=>{
             // delete the user also
             await User.findByIdAndDelete({_id: user_id});
         });
+
+        
        
         return res.status(200).json({
             success:true,

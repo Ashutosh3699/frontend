@@ -6,10 +6,10 @@ const Dashboard = () => {
   return (
     <div className='w-full bg-richblack-900'>
 
-        <div className='relative flex h-screen'>
+        <div className='relative flex  flex-row w-full  items-start  max-h-full'>
             <SideBar/>
 
-            <div className='w-11/12 mx-auto  max-w-[1000px] py-10'>
+            <div className='w-full mx-auto max-w-6xl py-10'>
                 {/* section / outlet */}
                 <Outlet/>
             </div>

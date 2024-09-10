@@ -7,7 +7,7 @@ const profileSchema = new  mongoose.Schema({
     },
     gender: {
         type:String,
-        enum: ["Male","Female"],
+        enum: ["Male","Female","Others"],
     },
     DOB:{
         type: String,

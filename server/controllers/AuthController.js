@@ -232,7 +232,9 @@ exports.changePassword = async(req,res)=>{
         // fetch data from req body
         const {email,oldPassword,newPassword,confirmPassword} = req.body;
         // compare old password and new password 
+        // console.log("user is: ", req.body);
         const  user = await User.findOne({email});
+        // console.log("user after password: ", user);
 
         if(!email || !oldPassword || !newPassword || !confirmPassword){
 
@@ -249,6 +251,7 @@ exports.changePassword = async(req,res)=>{
                 message: "Enter the old password correctly",
             })
         }
+        // console.log("response  is: ", response);
 
         if(newPassword !== confirmPassword){
             return res.status(401).json({
@@ -258,10 +261,13 @@ exports.changePassword = async(req,res)=>{
         }
         // hash the new password
         const hashPassword  = await bcrypt.hash(newPassword,10);
+        // console.log("hashPassword  is: ", hashPassword);
         // store the data in db
-        const data = await User.findByIdAndUpdate({email},{
+        const data = await User.findOneAndUpdate({email},{
             password:hashPassword,
-        });
+        },
+    {new:true}).populate("accountDetails")
+    .exec();
         // send a mail to user
         mailsender(user.email, "updatation of password", "Your password has been changed" )
         // return the response
