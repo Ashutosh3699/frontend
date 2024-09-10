@@ -25,7 +25,7 @@ const SideBar = () => {
     }
 
   return (
-    <div className='py-10  bg-richblack-800  flex flex-col   gap-4 border-r-[1px]  border-richblack-600 h-full'>
+    <div className='py-10  bg-richblack-800  flex flex-col   gap-4 border-r-[1px]  border-richblack-600 h-[100%]'>
 
         <div className='flex flex-col'>
             {
@@ -65,7 +65,7 @@ const SideBar = () => {
                 btn2Handler: ()=> setConfirmModal(null)
              })
              }}
-             className='flex flex-row gap-2 text-richblack-50 '
+             className='flex flex-row gap-2  py-2 px-8 items-center text-richblack-50 '
              >
                 <VscSignOut />
              <div>  logout  </div>

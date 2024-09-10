@@ -42,10 +42,12 @@ const ProfileDropDown = () => {
     ref={divref}
     >
     {/* changes here */}
+    <div className='w-full h-full overflow-hidden'>
       <img  src={user?.image} 
-      alt={`profile-img-${user?.image}`} 
-      className='w-full h-full object-contain  overflow-hidden' 
-      />
+        alt={`profile-img-${user?.image}`} 
+        className='w-full h-full object-contain  overflow-hidden rounded-full' 
+        />
+    </div>
 
       <div  
       className={`${attributeclass} absolute -left-32 top-[160%] flex flex-col justify-center items-center rounded-md
@@ -56,7 +58,7 @@ const ProfileDropDown = () => {
             -top-2  right-10 z-0'></div>
 
             <Link  to={"/dashboard/my-profile"}>
-            <div className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25">
+            <div className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-300 hover:bg-richblack-700 hover:text-richblack-25">
               <VscDashboard className="text-lg" />
               Dashboard
             </div>
@@ -66,7 +68,7 @@ const ProfileDropDown = () => {
             onClick={() => {
               dispatch(logout(navigate))
             }}
-            className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25"
+            className="flex w-full items-center justify-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-300 hover:bg-richblack-700 hover:text-richblack-25"
           >
             <VscSignOut className="text-lg" />
             Logout
