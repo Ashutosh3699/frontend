@@ -13,7 +13,7 @@ export const endpoints= {
 // profile of user getting ENPOINTS
 export const  profileEndpoints = {
     GET_USER_DETAILS_API: BASE_URL+"/profile/getAlluserDetails",
-    USER_ENROLLED_COURSE_API : BASE_URL+ "/profile/getAlluserDetails",
+    USER_ENROLLED_COURSE_API : BASE_URL+ "/profile/getEnrolledCourses",
 }
 
 // updation of the setting at the profile ENPOINTS

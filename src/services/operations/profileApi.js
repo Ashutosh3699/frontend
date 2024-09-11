@@ -1,9 +1,10 @@
 import {toast } from "react-hot-toast";
 import {setUser,setLoading} from "../../features/profileSlice";
 import {apiConnector} from "../apiConnector";
-import {settingEndpoints} from "../apis"
+import {settingEndpoints,profileEndpoints} from "../apis"
 
 const {UPDATE_PROFILE_PIC_API,UPDATE_PROFILE_API,CHANGE_PASSWORD_API,DELETE_PROFILE_API} = settingEndpoints;
+const {USER_ENROLLED_COURSE_API} = profileEndpoints
 
 export function updateProfilePic(file,token){
 
@@ -104,7 +105,7 @@ export function changePassword(data,token){
     }
 }
 
-export function DeleteAccount(data,token){
+export function getEnrolledCourses(token,setEnrolledCourses){
 
     return async(dispatch)=>{
         const toastId = toast.loading("loading...");
@@ -112,7 +113,39 @@ export function DeleteAccount(data,token){
 
         try {
             
-            const response = await apiConnector("DELETE", DELETE_PROFILE_API,data,{
+            const response = await apiConnector("GET", USER_ENROLLED_COURSE_API,null,{
+                "Authorization": `Bearer ${token}`
+            });
+
+            console.log(" response is: ", response);
+
+            if(!response.data.success){
+                throw new Error(response.data.success);
+            }
+
+            // working here
+            setEnrolledCourses(response.data.data);
+            // dispatch(setUser(null));
+            // toast.success("User courses is successfully fetched");
+
+        } catch (error) {
+            toast.error("User courses is failed while process..");
+            console.log(error);
+        }
+
+        dispatch(setLoading(false));
+        toast.dismiss(toastId);
+    }
+}
+
+export function DeleteAccount(token){
+    return async(dispatch)=>{
+        const toastId = toast.loading("loading...");
+        dispatch(setLoading(true));
+
+        try {
+            
+            const response = await apiConnector("DELETE", DELETE_PROFILE_API,null,{
                 "Authorization": `Bearer ${token}`
             });
 

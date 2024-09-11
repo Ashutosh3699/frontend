@@ -16,8 +16,13 @@ import MyProfile from "./Pages/MyProfile";
 import Error from "./Pages/Error"
 import PrivateRoute from "./Components/core/AuthTemplate/PrivateRoute";
 import Settings from "./Pages/Settings";
+import { useSelector } from "react-redux";
+import {ACCOUNT_TYPE} from "./utils/constant"
+import EnrolledCourses from "./Components/core/Dashboard/EnrolledCourses";
 
 function App() {
+
+  const {user} = useSelector((state)=>state.profile);
 
   return (
     <div>
@@ -107,6 +112,14 @@ function App() {
 
           <Route path="/dashboard/settings"
             element={<Settings/>}/>
+
+            {
+              user.accountType === ACCOUNT_TYPE.STUDENT && (
+                <Route path="/dashboard/enrolled-courses"
+                element= {<EnrolledCourses/>}
+                />
+              )
+            }
 
           </Route>
 
