@@ -20,29 +20,21 @@ const Settings = () => {
   return (
     <div className='w-full bg-richblack-900  text-richblack-25 h-full' >
 
-      <h2>Edit Profile</h2>
+      <h2 className='text-2xl font-bold text-richblack-5 mb-6'>Edit Profile</h2>
 
-      <div>
-          {/* section1 */}
-          <UploadImage/>
-      </div>
-
-      <div>
-          <h3>Profile Information</h3>
-
-          <ProfileUpdateForm   /> 
-      </div>
-
-      <div>
-        <h3>Password</h3>
-
-        <ChangePassword/>
-      </div>
-
-      <div>
-        {/* delete section */}
-
-          <DeleteProfile/>
+      <div className='flex flex-col gap-8 items-start w-11/12 mx-auto'>
+              {/* section1 */}
+              <UploadImage/>
+          <div className=' flex flex-col  w-[80%] justify-between  pr-4  pl-8 items-start  py-8  bg-richblack-800 rounded-lg border border-richblack-700'>
+              <h3 className='text-xl font-semibold text-richblack-50'>Profile Information</h3>
+              <ProfileUpdateForm   /> 
+          </div>
+          <div className='flex flex-col  w-[80%] justify-between gap-6  pr-4  pl-8 items-start  py-8  bg-richblack-800 rounded-lg border border-richblack-700'>
+            <h3 className='text-xl font-semibold text-richblack-50'>Password</h3>
+            <ChangePassword/>
+          </div>
+            {/* delete section */}
+            <DeleteProfile/>
       </div>
     
     

@@ -26,9 +26,11 @@ const ProfileUpdateForm = () => {
     
 
   return (
-    <form  onSubmit={handleSubmit(submitForm)}>
+    <form  onSubmit={handleSubmit(submitForm)}
+        className='flex flex-col gap-4  lg:w-10/12 mx-auto mt-6'
+    >
 
-        <div>
+        <div className='flex flex-row justify-between items-center'>
             {/* firstName */}
             <div  className='flex flex-col gap-1 items-start  my-4'>
                 <label  htmlFor='firstName'  className='text-md text-richblack-5 font-semibold pl-4 flex gap-1  items-start'>
@@ -63,7 +65,7 @@ const ProfileUpdateForm = () => {
         </div>
 
         {/* section2 */}
-        <div>
+        <div className='flex flex-row justify-between items-center'>
             {/* date of birth */}
             <div  className='flex flex-col gap-1 items-start  my-4'>
                 <label  htmlFor='DOB'  className='text-md text-richblack-5 font-semibold pl-4 flex gap-1  items-start'>
@@ -124,11 +126,11 @@ const ProfileUpdateForm = () => {
         </div>
 
         {/* section 3 */}
-        <div>
+       
             {/* gender */}
+        <div className='flex flex-col justify-between  items-start'>
+            <legend className='text-md text-richblack-5 font-semibold pl-4 flex gap-1  items-start'>Gender</legend>
             <div>
-                <legend>Gender</legend>
-                <div>
                 <label>Male
                     <input 
                         type="radio"
@@ -159,9 +161,9 @@ const ProfileUpdateForm = () => {
                         {...register("gender")}
                         />
                 </label>
-                </div>
             </div>
         </div>
+       
             
         <button type='submit'
         className={`px-5  py-2  rounded-md font-semibold  hover:scale-95 transition-all duration-300  mt-4

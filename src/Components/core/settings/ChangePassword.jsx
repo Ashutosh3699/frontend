@@ -28,10 +28,12 @@ const ChangePassword = () => {
 
 
   return (
-        <form onSubmit={handleSubmit(submitForm)}>
+        <form onSubmit={handleSubmit(submitForm)}
+        className='flex flex-col gap-4 items-start justify-between w-11/12 mx-auto'
+        >
 
             {/* current password */}
-            <div className='flex flex-col gap-1 items-start '>
+            <div className='flex flex-col gap-2 items-start '>
                     <label  htmlFor='oldPassword'  className='text-md text-richblack-5 font-semibold  pl-4 flex gap-1  items-start'>
                         Current Password 
                     </label>
@@ -58,9 +60,9 @@ const ChangePassword = () => {
 
                 </div>
 
-            <div  className='flex flex-row gap-3'>
+            <div  className='flex flex-row gap-6'>
 
-                <div className='flex flex-col gap-1 items-start '>
+                <div className='flex flex-col gap-2 items-start '>
                     <label  htmlFor='newPassword'  className='text-md text-richblack-5 font-semibold  pl-4 flex gap-1  items-start'>
                       New Password 
                     </label>
@@ -87,7 +89,7 @@ const ChangePassword = () => {
 
                 </div>
 
-                <div className='flex flex-col gap-1 items-start '>
+                <div className='flex flex-col gap-2 items-start '>
                     <label  htmlFor='confirmPassword'  className='text-md text-richblack-5 font-semibold  pl-4 flex gap-1  items-start'>
                     ConfirmPassword 
                     </label>
