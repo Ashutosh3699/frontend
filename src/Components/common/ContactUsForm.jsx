@@ -20,7 +20,7 @@ const ContactUsForm = () => {
         // console.log("logging data : ", data);
         try{
             setLoading(true);
-            const response = await apiConnector("POST", contact_us.CONTACT_US_API, data);
+            await apiConnector("POST", contact_us.CONTACT_US_API, data);
             setLoading(false);
         }
         catch(error) {

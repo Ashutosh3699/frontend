@@ -3,7 +3,6 @@ import { sidebarLinks } from '../../../data/dashboard-links';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../common/loader/Loading';
 import SidebarLinks from './SidebarLinks';
-import IconBtn from '../../common/IconBtn';
 import {logout} from "../../../services/operations/authApi"
 import { useNavigate } from 'react-router-dom';
 import ConfirmationModal from '../../common/ConfirmationModal';

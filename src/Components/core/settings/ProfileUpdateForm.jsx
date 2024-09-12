@@ -13,8 +13,6 @@ const ProfileUpdateForm = () => {
     const {
         register,
         handleSubmit,
-        reset,
-        formState: {errors, isSubmitSuccessful}
      } = useForm();
 
      const submitForm=(data)=>{
