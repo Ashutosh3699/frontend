@@ -114,6 +114,8 @@ exports.getAllUserDetails = async (req, res) => {
 
 exports.getEnrolledCourses = async(req,res)=>{
     try {
+
+        // console.log("user id is: ",req.user.id);
         const userId = req.user.id
         const userDetails = await User.findOne({
           _id: userId,

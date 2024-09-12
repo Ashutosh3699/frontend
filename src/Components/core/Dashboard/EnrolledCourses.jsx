@@ -51,7 +51,7 @@ const EnrolledCourses = () => {
                                             <img  src={course?.image} alt='profile-course' />
                                             <div>
                                                     <h4>{course?.courseName}</h4>
-                                                    <h6>{course?.courseDescription}</h6>
+                                                    <h6>{course?.courseDetail}</h6>
                                             </div>
                                     </div>
 

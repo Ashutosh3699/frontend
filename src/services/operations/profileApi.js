@@ -168,3 +168,36 @@ export function DeleteAccount(token){
         toast.dismiss(toastId);
     }
 }
+
+
+export function getAccountCourses(token,setMyCourses){
+
+    return async(dispatch)=>{
+        const toastId = toast.loading("loading...");
+        dispatch(setLoading(true));
+
+        try {
+            const response = await apiConnector("GET", USER_ENROLLED_COURSE_API,null,{
+                "Authorization": `Bearer ${token}`
+            });
+
+            console.log(" response is: ", response);
+
+            if(!response.data.success){
+                throw new Error(response.data.success);
+            }
+
+            // working here
+            setMyCourses(response.data.data);
+            // dispatch(setUser(null));
+            // toast.success("User courses is successfully fetched");
+
+        } catch (error) {
+            toast.error("User courses is failed while process..");
+            console.log(error);
+        }
+
+        dispatch(setLoading(false));
+        toast.dismiss(toastId);
+    }
+}
