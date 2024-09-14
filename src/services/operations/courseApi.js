@@ -268,7 +268,7 @@ export const deleteSubSection = async (data, token) => {
     return result
   }
 
-// fetching all courses under a specific instructor
+// fetching all courses under a specific instructor*********************************nhi bana*******************
 export const fetchInstructorCourses = async (token) => {
     let result = []
     const toastId = toast.loading("Loading...")
@@ -294,7 +294,7 @@ export const fetchInstructorCourses = async (token) => {
     return result
   }
 
-  // delete a course
+  // delete a course*********************************nhi bana*******************
 export const deleteCourse = async (data, token) => {
     const toastId = toast.loading("Loading...")
     try {
@@ -345,7 +345,7 @@ export const getFullDetailsOfCourse = async (courseId, token) => {
     return result
   }
   
-// mark a lecture as complete
+// mark a lecture as complete*********************************nhi bana*******************
 export const markLectureAsComplete = async (data, token) => {
     let result = null
     console.log("mark complete data", data)
@@ -373,7 +373,7 @@ export const markLectureAsComplete = async (data, token) => {
     return result
 }
 
-// create a rating for course
+// create a rating for course 
 export const createRating = async (data, token) => {
     const toastId = toast.loading("Loading...")
     let success = false
