@@ -13,7 +13,7 @@ exports.createCourse = async (req,res) =>{
         const  thumbnail = req.files.thumbnail;
         console.log(req.body);
         console.log(thumbnail);
-        if(!courseName || !courseDetail || !price || !whatWeWillLearn || !tag || !thumbnail || !category){
+        if(!courseName || !courseDetail || !price || !whatWeWillLearn || !tag || !thumbnail || !category || !status){
 
             return res.status(400).json({
                 success:false,

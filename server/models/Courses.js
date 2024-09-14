@@ -23,7 +23,6 @@ const courseSchema = new  mongoose.Schema({
     type:String,
     trim:true
   },
-  //************** */ status wali chijj karni hai***************
   courseContent: [{
     type:mongoose.Schema.Types.ObjectId,
     ref:"Section"
@@ -54,6 +53,7 @@ const courseSchema = new  mongoose.Schema({
   	instructions: {
 		type: [String],
 	},
+    //************** */ status wali chijj karni hai***************
 	status: {
 		type: String,
 		enum: ["Draft", "Published"],
