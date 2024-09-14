@@ -58,6 +58,9 @@ const MyCourses = () => {
                                                         <h6>{course?.courseDetail}</h6>
 
                                                         {/* status of course */}
+                                                        <div>
+                                                            {course?.status}
+                                                        </div>
                                                 </div>
                                         </div>
 
