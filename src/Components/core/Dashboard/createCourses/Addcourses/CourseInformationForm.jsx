@@ -4,13 +4,14 @@ import CourseRequirements from './CourseRequirements';
 import { useState,useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import {fetchCourseCategories} from "../../../../services/operations/courseApi";
+import {fetchCourseCategories} from "../../../../../services/operations/courseApi";
 import toast from 'react-hot-toast';
-import IconBtn from '../../../common/IconBtn';
-import { setStep, setCourse } from '../../../../features/courseSlice';
-import {COURSE_STATUS} from "../../../../utils/constant"
-import { editCourseDetails, addCourseDetails } from '../../../../services/operations/courseApi';
+import IconBtn from '../../../../common/IconBtn';
+import { setStep, setCourse, setEditCourse } from '../../../../../features/courseSlice';
+import {COURSE_STATUS} from "../../../../../utils/constant"
+import { editCourseDetails, addCourseDetails } from '../../../../../services/operations/courseApi';
 import CourseTags from './CourseTags';
+import CourseImageUploader from './CourseImageUploader';
 
 const CourseInformationForm = () => {
 
@@ -49,8 +50,8 @@ const CourseInformationForm = () => {
             setValue("category", course.category);
             setValue("courseBenefits", course.whatWeWillLearn);
             setValue("courseTags", course.tags);
-            // setValue("courseImage", course.thumbnail);
-            setValue("courseRequirement", course.instructions);
+            setValue("courseImage", course.thumbnail);
+            setValue("courseRequirements", course.instructions);
         }
 
     }, []);
@@ -65,7 +66,7 @@ const CourseInformationForm = () => {
             currentCourse.category._id !== course.category._id ||
             currentCourse.courseBenefits !== course.whatWeWillLearn ||
             currentCourse.courseTags.toString() !== course.tags.toString() ||
-            //currentCourse.courseImage !== course.thumbnail ||
+            currentCourse.courseImage !== course.thumbnail ||
             currentCourse.courseRequirements.toString() !== course.instructions.toString()
         ){
             return true;
@@ -102,19 +103,20 @@ const CourseInformationForm = () => {
             if(currentCourse.courseTags.toString() !== course.tags.toString()){
                 formData.append("tags", JSON.stringify(data.courseTags));
             }
-            // if(currentCourse.courseImage !== course.thumbnail){
-            //     formData.append("thumbnail", data.courseImage);
-            // }
+            if(currentCourse.courseImage !== course.thumbnail){
+                formData.append("thumbnail", data.courseImage);
+            }
             if(currentCourse.courseRequirements.toString() !== course.instructions.toString()){
                 formData.append("instructions", JSON.stringify(data.courseRequirements));
             }
 
             setLoading(true);
             const result = await editCourseDetails(formData, token);
-            console.log(" result is after edit is: ", result);
+            // console.log(" result is after edit is: ", result);
             setLoading(false);
             if(result){
-                setStep(2);
+                // console.log("inside the result is: ", result);
+                dispatch(setStep(2));
                 dispatch(setCourse(result));
             }
             
@@ -134,7 +136,7 @@ const CourseInformationForm = () => {
       formData.append("category", data.category);
       formData.append("whatWeWillLearn", data.courseBenefits);
       formData.append("tags", JSON.stringify(data.courseTags));
-    //   formData.append("thumbnail", data.courseImage);
+      formData.append("thumbnail", data.courseImage);
       formData.append("instructions", JSON.stringify(data.courseRequirements));
       formData.append("status", COURSE_STATUS.DRAFT);
 
@@ -146,11 +148,14 @@ const CourseInformationForm = () => {
       console.log("BEFORE add course API call");
       console.log("PRINTING FORMDATA", formData.entries());
       const result = await addCourseDetails(formData,token);
+      setLoading(false);
         if(result) {
-            setStep(2);
-            dispatch(setCourse(result));
+            console.log("changes at step section");
+            dispatch( setStep(2));
+            dispatch(setEditCourse(true));
+            dispatch(setCourse(result?.data?.data));
         }
-        setLoading(false);
+       
         console.log("PRINTING FORMDATA", );
         console.log("PRINTING result", result);
 
@@ -249,6 +254,13 @@ const CourseInformationForm = () => {
         />
 
         {/* image using common component */}
+            <CourseImageUploader
+                label={"Course Image"}
+                name={"courseImage"}
+                setValue={setValue}
+                errors={errors}
+                 register={register}
+            />
                 
             {/* course benefits */}
         <label className='w-full'>
@@ -269,15 +281,13 @@ const CourseInformationForm = () => {
         {/* requirements/ instructions */}
                 
             <CourseRequirements
-                name={"courseRequirement"}
+                name={"courseRequirements"}
                 label={"Requirements/Instructions"}
                 setValue={setValue}
                 errors={errors}
                 register={register}
             />
-
             {/* buttons countinue without saving & save change || next */}
-
             <div>
 
                   {

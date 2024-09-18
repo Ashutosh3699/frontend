@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import IconBtn from '../../../common/IconBtn';
+import IconBtn from '../../../../common/IconBtn';
 
-const CourseTags = ({label, name, register, setValue, getValues,errors }) => {
+const CourseTags = ({label, name, register, setValue,errors }) => {
 
     const [tags,setTags] = useState("");
     const [tagList, setTagList] = useState([]);
@@ -11,7 +11,11 @@ const CourseTags = ({label, name, register, setValue, getValues,errors }) => {
             required:true,
             validate: (value)=>value.length>0
         })
-    },[])
+    },[]);
+
+    useEffect(()=>{
+        setValue(name,tagList)
+    },[tagList])
 
     const handleRemovetag=(index)=>{
 
@@ -45,6 +49,9 @@ const CourseTags = ({label, name, register, setValue, getValues,errors }) => {
                 </div>
             ))
         }
+        {
+            errors[name] && <p>{label} is required</p>
+        }
         <input
             type='text'
             id={name}
@@ -56,7 +63,7 @@ const CourseTags = ({label, name, register, setValue, getValues,errors }) => {
         />
       <IconBtn
       text={"add tag"}
-      type={submit}
+      type={"submit"}
       onclick={()=>handleAddtag()}
       />
     
