@@ -8,12 +8,14 @@ require("dotenv").config();
 exports.createCourse = async (req,res) =>{
     try {
         // fetch file and data
-        const {courseName, courseDetail, price, whatWeWillLearn, tag,category,status , instructions} = req.body;
+        let  {courseName, courseDetail, price, whatWeWillLearn, tag,category,status , instructions} = req.body;
 
-        const  thumbnail = req.files.thumbnail;
-        console.log(req.body);
-        console.log(thumbnail);
-        if(!courseName || !courseDetail || !price || !whatWeWillLearn || !tag || !thumbnail || !category || !status){
+        // const  thumbnail = req.files.thumbnail;
+        console.log(req.body.courseName);
+        // console.log(thumbnail);
+        if(!courseName || !courseDetail || !price || !whatWeWillLearn 
+            // || !tag || !thumbnail
+             || !category || !status){
 
             return res.status(400).json({
                 success:false,
@@ -39,16 +41,16 @@ exports.createCourse = async (req,res) =>{
         }
         console.log("category is available", categoryIsAvailable);
         // image uploading
-        const imageURL = await fileAndImageUploader(thumbnail, process.env.FOLDER_NAME);
+        // const imageURL = await fileAndImageUploader(thumbnail, process.env.FOLDER_NAME);
 
-        console.log("image url is : ", imageURL.secure_url);
+        // console.log("image url is : ", imageURL.secure_url);
 
-        if(!imageURL){
-            return res.status(404).json({
-                success:false,
-                message: "Image uploading is not available"
-            });
-        }
+        // if(!imageURL){
+        //     return res.status(404).json({
+        //         success:false,
+        //         message: "Image uploading is not available"
+        //     });
+        // }
 
         // create a payload and enter in course db
         const response = await Courses.create({
@@ -56,10 +58,10 @@ exports.createCourse = async (req,res) =>{
             courseDetail,
             whatWeWillLearn,
             price,
-            thumbnail:imageURL.secure_url,
+            // thumbnail:imageURL.secure_url,
             category: categoryIsAvailable._id,
             instructor:instructor_id,
-            tag:tag,
+            // tag:tag,
             status: status,
 			instructions: instructions,
         });

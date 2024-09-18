@@ -1,6 +1,7 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import { TiTick } from "react-icons/ti";
+import CourseInformationForm from './CourseInformationForm';
 
 
 const stepData = [
@@ -21,13 +22,14 @@ const stepData = [
 const AddCourses = () => {
 
     const {step,course,editCourse} = useSelector((state)=>state.course);
-    const dispatch = useDispatch();
+   
 
+    
 
   return (
-    <div>
+    <div className='w-11/12 flex gap-2'>
 
-        <div>
+        <div className='w-[80%] flex flex-col'>
 
             <div className='flex justify-between items-center'>
                     {
@@ -43,18 +45,29 @@ const AddCourses = () => {
                                             steps.stepNo < step ? (<TiTick />) : (<span>{steps.stepNo}</span>)
                                         }
                                </div>
-                               <div>
+                               <div className='text-md text-richblack-25'>
                                         {
                                             steps.stepDesc
                                         }
                                </div>
+                               {/* add dashes */}
                             </div>
                         })
                     }
             </div>
 
             {/* form renders */}
-
+            {
+                step === 1 && <CourseInformationForm/>
+            }
+            {/* {
+                step === 2 &&  section creation
+            } */}
+            {/* {
+                step === 3  && publish Course
+            } */}
+            
+        
         </div>
 
         {/* information */}
