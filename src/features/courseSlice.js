@@ -7,7 +7,6 @@ const initialState = {
     paymentLoading: false,
     course: null,
     editCourse: false,
-    
 };
 
 export const courseSlice = createSlice({

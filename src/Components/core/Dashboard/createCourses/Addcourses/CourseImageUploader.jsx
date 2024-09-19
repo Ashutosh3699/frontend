@@ -38,8 +38,8 @@ const CourseImageUploader = ({label,name,setValue,register,errors}) => {
             onChange={handleImageChange}
         />
         {
-            image && <div className='w-20 h-20 rounded-full overflow-hidden'>
-                 <img src={image}  alt={`profile-${image}`} className='w-full' />
+            image && <div className=' w-48 h-48 '>
+                 <img src={image}  alt={`profile-${image}`} className='w-full bg-richblack-800 border border-richblack-700 rounded-lg py-1 px-2 text-lg  font-medium' />
          </div>
         }
          {

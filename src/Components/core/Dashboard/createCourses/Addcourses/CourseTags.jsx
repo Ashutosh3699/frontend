@@ -41,7 +41,7 @@ const CourseTags = ({label, name, register, setValue,errors }) => {
         </label>
         {
             tagList.map((item,index)=>(
-                <div key={index}>
+                <div key={index} className='lg:w-[70%] bg-richblack-800 border text-white border-richblack-700 rounded-lg py-1 px-2 text-lg  font-medium'>
                    <span> {item}  </span> 
                    <button
                    onClick={()=>handleRemovetag(index)}
@@ -58,7 +58,7 @@ const CourseTags = ({label, name, register, setValue,errors }) => {
             name={name}
             value={tags}
             placeholder={`Enter ${label}`}
-            className='lg:w-[70%]'
+            className='lg:w-[70%] bg-richblack-800 border border-richblack-700 rounded-lg py-1 px-2 text-lg  font-medium'
             onChange={(e)=>(setTags(e.target.value))}
         />
       <IconBtn

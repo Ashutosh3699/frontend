@@ -141,9 +141,9 @@ const CourseInformationForm = () => {
       formData.append("status", COURSE_STATUS.DRAFT);
 
 
-    for (const [key, value] of formData.entries()) {
-        console.log(key, value);
-      }
+    // for (const [key, value] of formData.entries()) {
+    //     console.log(key, value);
+    //   }
       setLoading(true);
       console.log("BEFORE add course API call");
       console.log("PRINTING FORMDATA", formData.entries());
@@ -166,8 +166,8 @@ const CourseInformationForm = () => {
     onSubmit={handleSubmit(onsubmit)}
     >
             {/* course title */}
-        <label className='w-full'>
-            <div>
+        <label className='w-full flex flex-col gap-1 items-start'>
+            <div className='text-md text-richblack-25 font-semibold'>
                 Course Title <sup>*</sup>
             </div>
             <input
@@ -175,7 +175,7 @@ const CourseInformationForm = () => {
                 type='text'
                 name='courseTitle'
                 placeholder='Enter Course Name'
-                className='lg:w-[70%]'
+                className='lg:w-[70%] bg-richblack-800 border border-richblack-700 rounded-lg py-1 px-2 text-lg  font-medium'
                 {...register("courseTitle", {required:true})}
             />
             {errors.courseTitle && <p>courseTitle is required.</p>}
@@ -188,9 +188,9 @@ const CourseInformationForm = () => {
             </div>
             <textarea
                 id='courseDescription'
-                className='min-w-[70%]  h-[120px]' 
                 name='courseDescription'
                 placeholder='Enter Course Description'
+                className='lg:min-w-[70%]  h-[120px] bg-richblack-800 border border-richblack-700 rounded-lg py-1 px-2 text-lg  font-medium'
                 {...register("courseDescription", {required:true})}
             />
             {errors.courseDescription && <p>courseDescription is required.</p>}
@@ -206,7 +206,7 @@ const CourseInformationForm = () => {
                     id='Price'
                     type='text'
                     name='Price'
-                    className='lg:w-[70%]'
+                    className='lg:w-[70%] bg-richblack-800 border border-richblack-700 rounded-lg py-1 px-2 text-lg  font-medium'
                     placeholder='Enter Course Price'
                     {...register("Price", {
                         required:true,
@@ -220,30 +220,27 @@ const CourseInformationForm = () => {
         </label>
 
             {/* course category */}
-            <div>
-            <label htmlFor='category'>Course Category<sup>*</sup></label>
-            <select
-            id='category'
-            defaultValue=""
-            {...register("category", {required:true})}
-            >
-                <option value="" disabled> Choose a Category</option>
-
-                {
-                    !loading && showCategory.map((category, index) => (
-                        <option key={index} value={category?._id}>
-                            {category?.name}
+        
+                <div>
+                    <label htmlFor="category">Course Category<sup>*</sup></label>
+                    <select
+                        id="category"
+                        defaultValue=""
+                        className="lg:w-[70%] text-white bg-richblack-800 border border-richblack-700 rounded-lg py-1 px-2 text-lg font-medium"
+                        {...register("category", { required: true })}
+                    >
+                        <option value="" >Choose a Category</option>
+                        {!loading && showCategory.map((category, index) => (
+                        <option key={index} value={category?._id} >
+                            {category?.categoryName}
                         </option>
-                    ))
-                }
+                        ))}
+                    </select>
+                    {errors.courseCategory && (
+                        <span className="text-red-500 font-bold">Course Category is Required</span>
+                    )}
+                </div>
 
-            </select>
-            {errors.courseCategory && (
-                <span>
-                    Course Category is Required
-                </span>
-            )}
-        </div>
         {/* tags using common component */}
         <CourseTags
             label={"Course Tags"}
@@ -270,7 +267,7 @@ const CourseInformationForm = () => {
                 <textarea
                     id='courseBenefits'
                     type='text'
-                    className='lg:w-[70%]  h-[120px]'
+                    className='lg:w-[70%] h-[120px] bg-richblack-800 border border-richblack-700 rounded-lg py-1 px-2 text-lg  font-medium'
                     name='courseBenefits'
                     placeholder='Enter Course Benefits'
                     {...register("courseBenefits", {required:true})}
