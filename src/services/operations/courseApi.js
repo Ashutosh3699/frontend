@@ -54,12 +54,12 @@ export const getAllCourses= async()=>{
     return result;
 }
 
-// fetch course details
+// fetch course details-->change
 export const fetchCourseDetails= async(courseId)=>{
     const toastId = toast.loading("Loading...")
     let result = null;
     try {
-        const response  = await apiConnector("GET", GET_COURSE_DETAIL_API,{courseId});
+        const response  = await apiConnector("POST", GET_COURSE_DETAIL_API,{courseId});
 
         if(!response.data.success){
             throw new Error("Could Not Fetch Course by CourseID")
@@ -224,12 +224,12 @@ export const updateSubSection = async (data, token) => {
     return result
  }
 
- // delete a section
+ // delete a section -->change
 export const deleteSection = async (data, token) => {
     let result = null
     const toastId = toast.loading("Loading...")
     try {
-      const response = await apiConnector("POST", DELETE_SECTION_API, data, {
+      const response = await apiConnector("DELETE", DELETE_SECTION_API, data, {
         Authorization: `Bearer ${token}`,
       })
       console.log("DELETE SECTION API RESPONSE............", response)
@@ -246,12 +246,12 @@ export const deleteSection = async (data, token) => {
     return result;
 }
 
-// delete a subsection
+// delete a subsection--->chnage
 export const deleteSubSection = async (data, token) => {
     let result = null
     const toastId = toast.loading("Loading...")
     try {
-      const response = await apiConnector("POST", DELETE_SUB_SECTION_API, data, {
+      const response = await apiConnector("DELETE", DELETE_SUB_SECTION_API, data, {
         Authorization: `Bearer ${token}`,
       })
       console.log("DELETE SUB-SECTION API RESPONSE............", response)

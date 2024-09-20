@@ -15,7 +15,7 @@ courseRouter.post("/createCourse",isAuth,isInstructor, createCourse);
 
 courseRouter.get("/getAllcourses",  getAllcourses);
 
-courseRouter.get("/getCourseDetails",  getCourseDetails);
+courseRouter.post("/getCourseDetails",  getCourseDetails);
 
 // creating all the router for rating and review
 courseRouter.post("/createRatingAndReview",isAuth,isStudent, createRatingandReview);

@@ -33,34 +33,32 @@ function CourseRequirements({label, name, errors, register, setValue}) {
 
   return (
     
-    <label className='w-full'>
-      <div>
-          {label}<sup>*</sup>
+    <label className="flex flex-col space-y-2 items-start ">
+      <div className='text-md text-richblack-25 font-semibold'>
+          {label}<sup  className="text-pink-200">*</sup>
       </div>
       <input
           id={name}
           type='text'
           name={name}
           placeholder={`Enter ${label}`}
-           className='lg:w-[70%] bg-richblack-800 border border-richblack-700 rounded-lg py-1 px-2 text-lg  font-medium'
+           className='lg:w-[70%] bg-richblack-800 text-richblack-25 border border-richblack-700 rounded-lg py-1 px-2 text-lg  font-medium'
           value={requirement}
           onChange={(e)=>(setRequirement(e.target.value))}
       />
       <button 
       type='button'
-       className="flex items-center justify-center px-4 py-2 rounded-md transition-all duration-300 
-                    bg-yellow-50 text-black font-bold hover:bg-yellow-100 cursor-pointer"
+      className="font-semibold text-yellow-50"
       onClick={()=>handleAddrequirement()}>
         Add
       </button>
      
       {
         requirementList.map((element,index)=>(
-          <div key={index}>
+          <div key={index} className="flex items-center text-richblack-5">
             <span>{element}</span>
             <button 
-             className="flex items-center justify-center px-4 py-2 rounded-md transition-all duration-300 
-                    bg-yellow-50 text-black font-bold hover:bg-yellow-100 cursor-pointer"
+             className="ml-2 text-xs text-pure-greys-300 "
               type='button'
               onClick={()=>handleRemoverequirement(index)}>
               clear
@@ -68,7 +66,7 @@ function CourseRequirements({label, name, errors, register, setValue}) {
           </div>
         ))
       }
-      {errors[name] && <p>{label} is required.</p>}
+      {errors[name] && <p  className="ml-2 text-xs tracking-wide text-pink-200">{label} is required.</p>}
       
 </label>
     

@@ -162,71 +162,75 @@ const CourseInformationForm = () => {
     }
 
   return (
-    <form className='w-full px-12 py-7  flex flex-col gap-4 text-richblack-25 items-start '
+    <form className="space-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6"
     onSubmit={handleSubmit(onsubmit)}
     >
             {/* course title */}
-        <label className='w-full flex flex-col gap-1 items-start'>
+        <label className="flex flex-col space-y-2">
             <div className='text-md text-richblack-25 font-semibold'>
-                Course Title <sup>*</sup>
+                Course Title <sup className="text-pink-200">*</sup>
             </div>
             <input
                 id='courseTitle'
                 type='text'
                 name='courseTitle'
                 placeholder='Enter Course Name'
-                className='lg:w-[70%] bg-richblack-800 border border-richblack-700 rounded-lg py-1 px-2 text-lg  font-medium'
+                className='lg:w-[70%] bg-richblack-800 text-richblack-25 border border-richblack-700 rounded-lg py-1 px-2 text-lg  font-medium'
                 {...register("courseTitle", {required:true})}
             />
-            {errors.courseTitle && <p>courseTitle is required.</p>}
+            {errors.courseTitle && <p  className="ml-2 text-xs tracking-wide text-pink-200">courseTitle is required.</p>}
         </label>
 
             {/* course description */}
-        <label className='w-full'>
-            <div>
-                Course Description <sup>*</sup>
+        <label className="flex flex-col space-y-2">
+            <div className='text-md text-richblack-25 font-semibold'>
+                Course Description <sup className="text-pink-200">*</sup>
             </div>
             <textarea
                 id='courseDescription'
                 name='courseDescription'
                 placeholder='Enter Course Description'
-                className='lg:min-w-[70%]  h-[120px] bg-richblack-800 border border-richblack-700 rounded-lg py-1 px-2 text-lg  font-medium'
+                className='lg:min-w-[70%]  h-[120px] bg-richblack-800 text-richblack-25 border border-richblack-700 rounded-lg py-1 px-2 text-lg  font-medium'
                 {...register("courseDescription", {required:true})}
             />
-            {errors.courseDescription && <p>courseDescription is required.</p>}
+            {errors.courseDescription && <p className="ml-2 text-xs tracking-wide text-pink-200">courseDescription is required.</p>}
         </label>
 
             {/* course price */}
-        <label className='w-full'>
-            <div>
-                Price <sup>*</sup>
+        <label className="flex flex-col space-y-2">
+            <div className='text-md text-richblack-25 font-semibold'>
+                Price <sup className="text-pink-200">*</sup>
             </div>
-            <div>
+            <div className="relative" >
                 <input
                     id='Price'
                     type='text'
                     name='Price'
-                    className='lg:w-[70%] bg-richblack-800 border border-richblack-700 rounded-lg py-1 px-2 text-lg  font-medium'
+                    className='lg:w-[70%] bg-richblack-800 border text-richblack-25  border-richblack-700 rounded-lg py-1 px-16 text-lg  font-medium'
                     placeholder='Enter Course Price'
                     {...register("Price", {
                         required:true,
-                        valueAsNumber:true
+                        valueAsNumber:true,
+                        pattern: {
+                            value: /^(0|[1-9]\d*)(\.\d+)?$/,
+                        },
                     })}
                 />
                 {/* rupee icon */}
-                <RiMoneyRupeeCircleLine />
+                <RiMoneyRupeeCircleLine className="absolute left-3 top-1/2 inline-block -translate-y-1/2 text-2xl text-richblack-400" />
             </div>
-            {errors.Price && <p>Price is required.</p>}
+            {errors.Price && <p className="ml-2 text-xs tracking-wide text-pink-200">Price is required.</p>}
         </label>
 
             {/* course category */}
         
-                <div>
-                    <label htmlFor="category">Course Category<sup>*</sup></label>
+                <div className="flex flex-col space-y-2">
+                    <label className='text-md text-richblack-25 font-semibold'
+                     htmlFor="category">Course Category<sup className="text-pink-200">*</sup></label>
                     <select
                         id="category"
                         defaultValue=""
-                        className="lg:w-[70%] text-white bg-richblack-800 border border-richblack-700 rounded-lg py-1 px-2 text-lg font-medium"
+                        className="lg:w-[70%] bg-richblack-800 border text-richblack-25 border-richblack-700 rounded-lg py-1 px-2 text-lg font-medium"
                         {...register("category", { required: true })}
                     >
                         <option value="" >Choose a Category</option>
@@ -237,7 +241,7 @@ const CourseInformationForm = () => {
                         ))}
                     </select>
                     {errors.courseCategory && (
-                        <span className="text-red-500 font-bold">Course Category is Required</span>
+                        <span className="ml-2 text-xs tracking-wide text-pink-200">Course Category is Required</span>
                     )}
                 </div>
 
@@ -245,34 +249,37 @@ const CourseInformationForm = () => {
         <CourseTags
             label={"Course Tags"}
             name={"courseTags"}
+            placeholder="Enter Tags and press Enter"
             setValue={setValue}
             errors={errors}
             register={register}
+            getValues={getValues}
         />
 
         {/* image using common component */}
             <CourseImageUploader
-                label={"Course Image"}
-                name={"courseImage"}
+                name="courseImage"
+                label="Course Thumbnail"
+                register={register}
                 setValue={setValue}
                 errors={errors}
-                 register={register}
+                editData={editCourse ? course?.thumbnail : null}
             />
                 
             {/* course benefits */}
-        <label className='w-full'>
-            <div>
-                Benefits of course <sup>*</sup>
+        <label className="flex flex-col space-y-2">
+            <div className='text-md text-richblack-25 font-semibold' >
+                Benefits of course <sup className="text-pink-200">*</sup>
                 </div>
                 <textarea
                     id='courseBenefits'
                     type='text'
-                    className='lg:w-[70%] h-[120px] bg-richblack-800 border border-richblack-700 rounded-lg py-1 px-2 text-lg  font-medium'
+                    className='lg:w-[70%] h-[120px] bg-richblack-800 text-richblack-25 border resize-x-none min-h-[130px] w-full border-richblack-700 rounded-lg py-1 px-2 text-lg  font-medium'
                     name='courseBenefits'
-                    placeholder='Enter Course Benefits'
+                    placeholder="Enter benefits of the course"
                     {...register("courseBenefits", {required:true})}
                 />
-                {errors.courseBenefits && <p>courseBenefits is required.</p>}
+                {errors.courseBenefits && <p className="ml-2 text-xs tracking-wide text-pink-200">courseBenefits is required.</p>}
         </label>
 
         {/* requirements/ instructions */}
@@ -285,12 +292,14 @@ const CourseInformationForm = () => {
                 register={register}
             />
             {/* buttons countinue without saving & save change || next */}
-            <div>
+            <div className="flex justify-end gap-x-2">
 
                   {
                     editCourse && (
-                        <button onClick={()=>{dispatch(setStep(2))}}
-                        className='flex items-center gap-x-2 bg-richblack-300'
+                        <button 
+                            onClick={()=>{dispatch(setStep(2))}}
+                         disabled={loading}
+                         className={`flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-[8px] px-[20px] font-semibold text-richblack-900`}
                         >
                         countinue without saving
                         </button>
@@ -298,6 +307,8 @@ const CourseInformationForm = () => {
                   }
                  
                  <IconBtn
+                 disabled={loading}
+                 customCLass={"flex cursor-pointer items-center gap-x-2 rounded-md bg-yellow-50 py-[8px] px-[20px] font-semibold text-richblack-900 "}
                  text={!editCourse ? ("next") : ("save change")}
                  />
             </div>
