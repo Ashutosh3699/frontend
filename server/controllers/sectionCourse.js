@@ -1,5 +1,6 @@
 const  Course = require("../models/Courses");
 const Section = require("../models/Section");
+const SubSection = require("../models/SubSection")
 
 exports.createSection = async(req,res) =>{
 
@@ -46,16 +47,25 @@ exports.updateSection = async(req,res)=>{
 
     try {
         // fetch the data and courseid
-        const {section_id,sectionName } = req.body;
+        const {sectionId,sectionName,courseId } = req.body;
+        console.log("req is: ", req.body);
         // validate the data
-        if(!sectionName || !section_id){
+        if(!sectionName || !sectionId){
             return res.status(400).json({
                 success:false,
                 message: "Enter the data properly, all details are not available"
             });
         }
         // update the section in db
-        await Section.findByIdAndUpdate(section_id, {sectionName:sectionName}, {new:true});
+         await Section.findByIdAndUpdate(sectionId, {sectionName:sectionName}, {new:true});
+
+        // pass the course as result
+        const  response = await Course.findById(courseId).populate({
+            path:"courseContent",
+            populate:{
+                path:"videoUrl"
+            }
+        }).exec();
 
         // return the response
         return res.status(200).json({
@@ -78,20 +88,45 @@ exports.deleteSection = async(req,res)=>{
 
     try {
         // fetch the data and courseid
-        const {section_id } = req.params;
+        const {sectionId , courseId} = req.body;
         // validate the data
-        if(!section_id ){
+        if(!sectionId || !courseId ){
             return res.status(400).json({
                 success:false,
                 message: "Enter the data properly, all details are not available"
             });
         }
-        // delete the section
-        await Section.findByIdAndDelete(section_id);
-        // Deleting the object ID from the parent schema could lead to data inconsistencies and potential errors
-        //  Each document in MongoDB has a unique object ID. This means that even if you delete the child entity, the object ID in the parent schema will still be unique and valid.
+        // remove the section from course
+        await Course.findByIdAndUpdate(courseId,{
+            $pull : {
+                courseContent:sectionId,
+            }
+        })
+
+        const section = await Section.findById(sectionId);
+		console.log(sectionId, courseId);
+
+        if(!section) {
+			return res.status(404).json({
+				success:false,
+				message:"Section not Found",
+			})
+		}
+        // delete the sub section
+        await SubSection.deleteMany({_id: {$in: section.videoUrl}})
+        
+        await Section.findByIdAndDelete(sectionId);
+
+        const result = await Course.findById(courseId).populate({
+            path: "courseContent",
+            populate: {
+                path:"videoUrl"
+            }
+        }).exec()
+     
         return res.status(200).json({
             success:true,
+            data:result,
             message: " section is deleted successfully"
         })
     } catch (error) {

@@ -7,8 +7,9 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { setCourse, setEditCourse, setStep } from '../../../../../features/courseSlice';
 import toast from 'react-hot-toast';
 import { createSection, updateSection } from '../../../../../services/operations/courseApi';
+import NestedView from './NestedView';
 
-const CreateSection = () => {
+const CreateSection = ( ) => {
 
     const {
       register,
@@ -16,13 +17,13 @@ const CreateSection = () => {
       getValues,
       formState: {errors},
       handleSubmit,
-      watch
     } = useForm();
 
     const {course} = useSelector((state)=>state.course);
+    // console.log("course is:",course);
     const dispatch = useDispatch();
 
-    const [editSectionName, setEditSectionName] = useState(false);
+    const [editSectionName, setEditSectionName] = useState(null);
     const [loading,setLoading] = useState(false);
     const {token} = useSelector((state)=>state.auth);
 
@@ -81,61 +82,72 @@ const CreateSection = () => {
 
     }
 
+    const handleChangeSectionName = (sectionId,sectionName)=>{
+
+      if(editSectionName === sectionId){
+        cancelEdit();
+        return;
+      }
+
+      setEditSectionName(sectionId);
+      setValue("sectionName", sectionName);
+    }
+
 
   return (
-    <div>
+    <div className="space-y-8 rounded-md border-[1px] text-richblack-25  border-richblack-700 bg-richblack-800 p-6">
 
-<form className="space-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-
-      <h2>Course Builder</h2>
-
-      <div>
-            
-            <label  htmlFor='sectionName'>
-                Section Name <sup>*</sup>
-            </label>
-
-            <input
-              type='text'
-              id='sectionName'
-              placeholder='Add a Section Name'
-              {...register("sectionName",{
-                required:true
-              })}
-              className='w-full'
-            />
-            {
-              errors.sectionName && <p>Section name is required</p>
-            }
-      </div>
-      <div className='mt-10 flex w-full'>
-            <IconBtn
-            type={"submit"}
-            text={editSectionName ? ("Edit section name") : ("Create section name")}
-            outline={true}
-            customCLass={"text-richblack-50 bg-yellow-50"}
+        <form 
+              onSubmit={handleSubmit(onSubmit)}
             >
-              <IoAddCircleOutline className='bg-yellow-50 text-yellow-5' size={20} /> 
-            </IconBtn>
 
-            {
-              editSectionName && <button
-              type='button'
-              onClick={cancelEdit}
-              className='text-md text-richblack-100 underline'
-              >
-                cancel edit
-              </button>
-            }
-      </div>
+              <h2>Course Builder</h2>
 
-    </form>
+              <div>
+                    
+                    <label  htmlFor='sectionName'>
+                        Section Name <sup>*</sup>
+                    </label>
+
+                    <input
+                      type='text'
+                      id='sectionName'
+                      placeholder='Add a Section Name'
+                      {...register("sectionName",{
+                        required:true
+                      })}
+                      className='w-full text-richblack-800'
+                    />
+                    {
+                      errors.sectionName && <p>Section name is required</p>
+                    }
+              </div>
+              <div className='mt-10 flex w-full'>
+                    <IconBtn
+                    type={"submit"}
+                    text={editSectionName ? ("Edit section name") : ("Create section name")}
+                    outline={true}
+                    customCLass={"text-richblack-50 bg-yellow-50 flex"}
+                    >
+                      <IoAddCircleOutline className='bg-yellow-50 text-yellow-5' size={20} /> 
+                    </IconBtn>
+
+                    {
+                      editSectionName && <button
+                      type='button'
+                      onClick={cancelEdit}
+                      className='text-md text-richblack-100 underline'
+                      >
+                        cancel edit
+                      </button>
+                    }
+              </div>
+
+            </form>
 
             {
               course.courseContent?.length > 0  && (
-                <NestedView/>
+                <NestedView  handleChangeSectionName={handleChangeSectionName} />
               )
             }
 
@@ -150,6 +162,7 @@ const CreateSection = () => {
                 <IconBtn
                 text={"Next"}
                 onclick={goToNext}
+                customCLass={"text-richblack-800 px-4 py-1 bg-yellow-50 rounded-md flex gap-1 item-center"}
                 >
                     <FaArrowRightLong/>
                 </IconBtn>

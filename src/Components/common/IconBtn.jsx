@@ -10,7 +10,7 @@ const IconBtn = ({text,children,type,disabled=false,outline,onclick,customCLass 
     >
         {
           children ? (<div>
-            <span>{text}</span>
+            <div>{text}</div>
              {children}
           </div>) :(text)
         }

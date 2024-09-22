@@ -47,7 +47,7 @@ const courseSchema = new  mongoose.Schema({
     ref: "ReviewAndRating",
   }],
   tag: {
-    type:String,
+    type:[String],
     trim:true
   },
   	instructions: {

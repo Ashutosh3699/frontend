@@ -6,7 +6,8 @@ import { FiUploadCloud } from "react-icons/fi";
 import "video-react/dist/video-react.css"
 import { Player } from "video-react"
 
-const CourseImageUploader = ({ name,
+const CourseImageUploader = ({ 
+  name,
   label,
   register,
   setValue,
@@ -15,6 +16,7 @@ const CourseImageUploader = ({ name,
   viewData = null,
   editData = null}) => {
 
+    console.log("view Data:", viewData);
     const [selectedFile, setSelectedFile] = useState(null)
     const [previewSource, setPreviewSource] = useState(
       viewData ? viewData : editData ? editData : ""
@@ -54,7 +56,7 @@ const CourseImageUploader = ({ name,
       setValue(name, selectedFile)
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedFile, setValue])
-// console.log("image is:", image);
+console.log("image is:", previewSource);
 
 
   return (

@@ -44,7 +44,7 @@ const CourseInformationForm = () => {
         console.log("categories are: ", showCategory);
 
         if(editCourse){
-            setValue("courseTitle", course.courseTitle);
+            setValue("courseTitle", course.courseName);
             setValue("courseDescription", course.courseDetail);
             setValue("Price", course.price);
             setValue("category", course.category);
@@ -153,7 +153,7 @@ const CourseInformationForm = () => {
             console.log("changes at step section");
             dispatch( setStep(2));
             dispatch(setEditCourse(true));
-            dispatch(setCourse(result?.data?.data));
+            dispatch(setCourse(result));
         }
        
         console.log("PRINTING FORMDATA", );

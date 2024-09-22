@@ -36,7 +36,7 @@ courseRouter.get("/CategoryPageDetails", CategoryPageDetails);
 // creating all the router for courses sections
 courseRouter.post("/createSection",isAuth,isInstructor, createSection);
 
-courseRouter.put("/updateSection", isAuth,isInstructor, updateSection);
+courseRouter.post("/updateSection", isAuth,isInstructor, updateSection);
 
 courseRouter.delete("/deleteSection",isAuth,isInstructor, deleteSection);
 

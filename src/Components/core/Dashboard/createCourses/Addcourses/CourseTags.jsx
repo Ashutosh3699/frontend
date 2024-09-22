@@ -4,13 +4,13 @@ import { useSelector } from "react-redux"
 
 const CourseTags = ({label, name, register, setValue,errors,placeholder }) => {
 
-    const [chip,setChips] = useState([]);
+    const [chips,setChips] = useState([]);
     const { editCourse, course } = useSelector((state) => state.course)
 
     useEffect(()=>{
 
         if (editCourse) {
-            // console.log(course)
+            console.log(course)
             setChips(course?.tag)
           }
 
@@ -21,8 +21,8 @@ const CourseTags = ({label, name, register, setValue,errors,placeholder }) => {
     },[]);
 
     useEffect(()=>{
-        setValue(name,chip)
-    },[chip])
+        setValue(name,chips)
+    },[chips])
 
    // Function to handle user input when chips are added
    const handleKeyDown = (event) => {
@@ -33,9 +33,9 @@ const CourseTags = ({label, name, register, setValue,errors,placeholder }) => {
       // Get the input value and remove any leading/trailing spaces
       const chipValue = event.target.value.trim()
       // Check if the input value exists and is not already in the chips array
-      if (chipValue && !chip.includes(chipValue)) {
+      if (chipValue && !chips.includes(chipValue)) {
         // Add the chip to the array and clear the input
-        const newChips = [...chip, chipValue]
+        const newChips = [...chips, chipValue]
         setChips(newChips)
         event.target.value = ""
       }
@@ -45,10 +45,11 @@ const CourseTags = ({label, name, register, setValue,errors,placeholder }) => {
   // Function to handle deletion of a chip
   const handleDeleteChip = (chipIndex) => {
     // Filter the chips array to remove the chip with the given index
-    const newChips = chip.filter((_, index) => index !== chipIndex)
+    const newChips = chips.filter((_, index) => index !== chipIndex)
     setChips(newChips)
   }
 
+  console.log("chip is: ", chips);
 
   return (
     <div className="flex flex-col space-y-2">
@@ -57,25 +58,27 @@ const CourseTags = ({label, name, register, setValue,errors,placeholder }) => {
         {label} <sup className="text-pink-200">*</sup>
       </label>
       {/* Render the chips and input */}
-      <div className="flex w-full flex-wrap gap-y-2">
+      <div className="flex flex-col w-full flex-wrap gap-y-2">
         {/* Map over the chips array and render each chip */}
-        {chip.map((chip, index) => (
-          <div
-            key={index}
-            className="m-1 flex items-center rounded-full bg-yellow-400 px-2 py-1 text-sm text-richblack-5"
-          >
-            {/* Render the chip value */}
-            {chip}
-            {/* Render the button to delete the chip */}
-            <button
-              type="button"
-              className="ml-2 focus:outline-none"
-              onClick={() => handleDeleteChip(index)}
-            >
-              <MdClose className="text-sm" />
-            </button>
-          </div>
-        ))}
+        <div className='flex gap-x-2 flex-wrap items-center'>
+            {chips?.map((chip, index) => (
+              <div
+                key={index}
+                className="m-1 flex items-center rounded-full bg-yellow-400 px-2 py-1 text-sm text-richblack-5"
+              >
+                {/* Render the chip value */}
+                {chip}
+                {/* Render the button to delete the chip */}
+                <button
+                  type="button"
+                  className="ml-2 focus:outline-none"
+                  onClick={() => handleDeleteChip(index)}
+                >
+                  <MdClose className="text-sm" />
+                </button>
+              </div>
+            ))}
+        </div>
         {/* Render the input for adding new chips */}
         <input
           id={name}
