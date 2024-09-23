@@ -14,9 +14,9 @@ const {
     UPDATE_SUB_SECTION_API,
 
     GET_ALL_COURSE_API,
-    GET_ALL_RATING_API,
-    GET_ALL_RATING_OF_COURSE_API,
-    GET_AVG_RATING_API,
+    // GET_ALL_RATING_API,
+    // GET_ALL_RATING_OF_COURSE_API,
+    // GET_AVG_RATING_API,
     GET_COURSE_DETAIL_API,
 
     DELETE_SECTION_API,
@@ -313,7 +313,7 @@ export const deleteCourse = async (data, token) => {
     toast.dismiss(toastId)
   }
 
-// get full details of a course
+// get full details of a course*********************************
 export const getFullDetailsOfCourse = async (courseId, token) => {
     const toastId = toast.loading("Loading...")
     //   dispatch(setLoading(true));

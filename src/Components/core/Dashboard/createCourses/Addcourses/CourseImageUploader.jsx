@@ -16,7 +16,7 @@ const CourseImageUploader = ({
   viewData = null,
   editData = null}) => {
 
-    console.log("view Data:", viewData);
+    // console.log("view Data:", viewData);
     const [selectedFile, setSelectedFile] = useState(null)
     const [previewSource, setPreviewSource] = useState(
       viewData ? viewData : editData ? editData : ""
@@ -56,7 +56,7 @@ const CourseImageUploader = ({
       setValue(name, selectedFile)
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedFile, setValue])
-console.log("image is:", previewSource);
+// console.log("image is:", previewSource);
 
 
   return (

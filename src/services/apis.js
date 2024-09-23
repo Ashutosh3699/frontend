@@ -50,9 +50,9 @@ export const courseEndpoint={
 
     CREATE_COURSE_API: BASE_URL+"/courseRouter/createCourse",
     GET_ALL_COURSE_API: BASE_URL+"/courseRouter/getAllcourses",
-    GET_COURSE_DETAIL_API: BASE_URL+"/courseRouter/getCourseDetails",
+    GET_COURSE_DETAIL_API: BASE_URL+"/courseRouter/getFullCourseDetails",
 //banaye nhi hai
-    EDIT_COURSE_API: BASE_URL + "/courseRouter/editCourse",
+    EDIT_COURSE_API: BASE_URL + "/courseRouter/editCourseDetails",
     LECTURE_COMPLETION_API: BASE_URL + "/courseRouter/updateCourseProgress",
     DELETE_COURSE_API: BASE_URL + "/courseRouter/deleteCourse",
     GET_ALL_INSTRUCTOR_COURSES_API: BASE_URL + "/course/getInstructorCourses",

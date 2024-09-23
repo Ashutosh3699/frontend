@@ -10,7 +10,7 @@ const CourseTags = ({label, name, register, setValue,errors,placeholder }) => {
     useEffect(()=>{
 
         if (editCourse) {
-            console.log(course)
+            // console.log(course)
             setChips(course?.tag)
           }
 
@@ -49,7 +49,7 @@ const CourseTags = ({label, name, register, setValue,errors,placeholder }) => {
     setChips(newChips)
   }
 
-  console.log("chip is: ", chips);
+  // console.log("chip is: ", chips);
 
   return (
     <div className="flex flex-col space-y-2">

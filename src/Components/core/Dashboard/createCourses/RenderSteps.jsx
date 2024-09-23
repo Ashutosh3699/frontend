@@ -3,6 +3,7 @@ import { FaCheck } from 'react-icons/fa';
 import { useSelector } from 'react-redux'
 import CourseInformationForm from './Addcourses/CourseInformationForm';
 import CreateSection from './craeteSection/CreateSection';
+import PublishCourse from './publishCourse/PublishCourse';
 
 
 
@@ -85,7 +86,7 @@ const RenderSteps = () => {
          {/* Render specific component based on current step */}
         {step === 1 && <CourseInformationForm />}
         {step === 2 && <CreateSection/>}
-        {/* {step===3 && <PublishCourse/>} */}
+        {step===3 && <PublishCourse/>}
     </>
   )
 }

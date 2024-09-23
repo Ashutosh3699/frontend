@@ -41,11 +41,12 @@ const CreateSection = ( ) => {
 
     const goToNext=()=>{
 
-      if(course?.courseContent?.length === 0){
+      // console.log("courses is: ", course);
+      if(course?.courseContent.length === 0){
         toast.error("Add atleast one section");
         return;
       }
-      if(course?.courseContent.some((section)=>section.subSection.length===0)){
+      if(course?.courseContent.some((section)=>section.videoUrl.length===0)){
         toast.error("Add suSection ");
         return;
       }
