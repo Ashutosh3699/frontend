@@ -2,23 +2,30 @@ import React, { useState,useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../../../common/loader/Loading';
 import { getAccountCourses } from '../../../../services/operations/profileApi';
+import { useNavigate } from 'react-router-dom';
+import { fetchInstructorCourses } from '../../../../services/operations/courseApi';
+import IconBtn from '../../../common/IconBtn';
+import CoursesTable from './CoursesTable';
 
 const MyCourses = () => {
 
-    const {token,loading} = useSelector((state)=>state.auth);
-    const  [myCourses, setMyCourses] = useState([]);
+    const {token} = useSelector((state)=>state.auth);
+    const navigate = useNavigate();
+    const  [courses, setCourses] = useState([]);
+    const [loading,setLoading] = useState(false);
 
     const dispatch = useDispatch();
 
-    const fetchCourses =()=>{
-
-        dispatch(getAccountCourses(token, setMyCourses));
+    const fetchCourses = async()=>{
+        const result = await fetchInstructorCourses(token);
+        // console.log("result", result);
+        if(result){
+            setCourses(result);
+        }
     }
 
     useEffect(() => {
-        // console.log("fetching courses ....");
         fetchCourses();
-        // console.log("fetch course after");
     }, [])
     
 
@@ -30,66 +37,20 @@ const MyCourses = () => {
         loading ? (
             <Loading/>
         ) : (
-            !myCourses.length  ? (<div>No courses created yet</div>) : (
-                <div>
-
+           <div>
+                <div className='flex justify-between items-center pb-10 pt-2'>
                     <h2>My Courses</h2>
-
-                        <div className='flex flex-col gap-2 items-start '>
-
-                            <div  className='flex items-center px-6 py-2 justify-between'>
-
-                                <h3>Courses</h3>
-                                <h3>Duration</h3>
-                                <h3>Price</h3>
-                                <h3>Actions</h3>
-
-                            </div>
-
-                            {
-                                myCourses.map((course,index)=>(
-                                    <div key={index}>
-
-                                        <div>
-                                                <img  src={course?.image} alt='profile-course' />
-                                                <div>
-                                                        <h4>{course?.courseName}</h4>
-                                                        <h6>{course?.whatWeWillLearn}</h6>
-                                                        <h6>{course?.courseDetail}</h6>
-
-                                                        {/* status of course */}
-                                                        <div>
-                                                            {course?.status}
-                                                        </div>
-                                                </div>
-                                        </div>
-
-                                        <div>
-                                            {course?.timeduration}
-                                        </div>
-
-                                        <div>
-                                            <p> Rs  {course?.price}</p>
-                                        </div>
-
-                                        <div className='flex gap-3'>
-                                            <button>
-                                                Edit
-                                            </button>
-                                            <button>
-                                                Remove
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                ))
-                            }
-
-                            </div>
-
-
+                    <IconBtn
+                        text={"Add course"}
+                        onclick={()=>navigate("/dashboard/add-course")}
+                    />
                 </div>
-            )
+
+                {
+                    courses && <CoursesTable courses={courses}  setCourses={setCourses}/>
+                }
+
+           </div>
         )
     }
     

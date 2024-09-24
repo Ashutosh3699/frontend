@@ -12,6 +12,7 @@ import {COURSE_STATUS} from "../../../../../utils/constant"
 import { editCourseDetails, addCourseDetails } from '../../../../../services/operations/courseApi';
 import CourseTags from './CourseTags';
 import CourseImageUploader from './CourseImageUploader';
+import { useNavigate } from 'react-router-dom';
 
 const CourseInformationForm = () => {
 
@@ -20,6 +21,7 @@ const CourseInformationForm = () => {
     const [showCategory,setShowCategory] = useState([]);
     const {course,editCourse} = useSelector((state)=>state.course);
     const {token} = useSelector((state)=>state.auth);
+    const navigate = useNavigate();
 
     const {
         register,
@@ -100,8 +102,8 @@ const CourseInformationForm = () => {
             if(currentCourse.courseBenefits !== course.whatWeWillLearn){
                 formData.append("whatWeWillLearn", data.courseBenefits);
             }
-            if(currentCourse.courseTags.toString() !== course.tags.toString()){
-                formData.append("tags", JSON.stringify(data.courseTags));
+            if(currentCourse.courseTags.toString() !== course.tag.toString()){
+                formData.append("tag", JSON.stringify(data.courseTags));
             }
             if(currentCourse.courseImage !== course.thumbnail){
                 formData.append("thumbnail", data.courseImage);
@@ -125,6 +127,8 @@ const CourseInformationForm = () => {
             toast("No changes made yet");
         }
 
+        navigate("/dashboard/my-courses");
+
         return ;
       }
 
@@ -135,7 +139,7 @@ const CourseInformationForm = () => {
       formData.append("price", data.Price);
       formData.append("category", data.category);
       formData.append("whatWeWillLearn", data.courseBenefits);
-      formData.append("tags", JSON.stringify(data.courseTags));
+      formData.append("tag", JSON.stringify(data.courseTags));
       formData.append("thumbnail", data.courseImage);
       formData.append("instructions", JSON.stringify(data.courseRequirements));
       formData.append("status", COURSE_STATUS.DRAFT);
@@ -233,7 +237,7 @@ const CourseInformationForm = () => {
                         className="lg:w-[70%] bg-richblack-800 border text-richblack-25 border-richblack-700 rounded-lg py-1 px-2 text-lg font-medium"
                         {...register("category", { required: true })}
                     >
-                        <option value="" >Choose a Category</option>
+                        <option value=""  disabled>Choose a Category</option>
                         {!loading && showCategory.map((category, index) => (
                         <option key={index} value={category?._id} >
                             {category?.categoryName}

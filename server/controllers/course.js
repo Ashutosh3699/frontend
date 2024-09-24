@@ -12,22 +12,36 @@ require("dotenv").config();
 exports.createCourse = async (req,res) =>{
     try {
         // fetch file and data
-        let  {courseName, courseDetail, price, whatWeWillLearn, tags,category,status , instructions} = req.body;
+        let  {courseName, 
+            courseDetail, 
+            price, 
+            whatWeWillLearn, 
+            tag: _tag,
+            category,
+            status ,  
+            instructions: _instructions,} = req.body;
 
         const  thumbnail = req.files.thumbnail;
-        console.log(req.body);
-        console.log(thumbnail);
-        if(!courseName || !courseDetail || !price || !whatWeWillLearn 
-            || !tags || !thumbnail
-             || !category || !status){
-
-            return res.status(400).json({
-                success:false,
-                message: "Enter all the details",
-            });
-        }
+       
         // *************** status wali chijj reh gai hai ********
         // status = "Draft";
+
+            // Convert the tag and instructions from stringified Array to Array
+            const tag = JSON.parse(_tag)
+            const instructions = JSON.parse(_instructions)
+
+            console.log("tag", tag)
+            console.log("instructions", instructions)
+
+            if(!courseName || !courseDetail || !price || !whatWeWillLearn 
+                || !tag.length || !thumbnail
+                 || !category || !status || !instructions.length){
+    
+                return res.status(400).json({
+                    success:false,
+                    message: "Enter all the details",
+                });
+            }
   
         // check the instructor dont require a db call as we will get the instructor id only
         const instructor_id = req.user.id;
@@ -65,9 +79,9 @@ exports.createCourse = async (req,res) =>{
             thumbnail:imageURL.secure_url,
             category: categoryIsAvailable._id,
             instructor:instructor_id,
-            tag:tags,
-            status: status,
-			instructions: instructions,
+            tag,
+            status,
+			instructions,
         });
 
         console.log("course created: ", response);
@@ -290,11 +304,13 @@ exports.getInstructorCourses= async(req,res)=>{
     try {
         // Get the instructor ID from the authenticated user or request body
         const instructorId = req.user.id;
-
+        // console.log("instructor id: ", instructorId);
         // Find all courses belonging to the instructor
         const instructorCourses = await Courses.find({
             instructor: instructorId
         }).sort({createdAt:-1});
+
+        // console.log("instructor course", instructorCourses);
 
         // Return the instructor's courses
         res.status(200).json({
