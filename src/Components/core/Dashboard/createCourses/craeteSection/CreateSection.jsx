@@ -14,7 +14,6 @@ const CreateSection = ( ) => {
     const {
       register,
       setValue,
-      getValues,
       formState: {errors},
       handleSubmit,
     } = useForm();
@@ -97,17 +96,16 @@ const CreateSection = ( ) => {
 
   return (
     <div className="space-y-8 rounded-md border-[1px] text-richblack-25  border-richblack-700 bg-richblack-800 p-6">
-
+          <h2 className="text-2xl font-semibold text-richblack-5">Course Builder</h2>
         <form 
               onSubmit={handleSubmit(onSubmit)}
+               className="space-y-4"
             >
 
-              <h2>Course Builder</h2>
-
-              <div>
+              <div className="flex flex-col space-y-2">
                     
-                    <label  htmlFor='sectionName'>
-                        Section Name <sup>*</sup>
+                    <label  htmlFor='sectionName' className="text-sm text-richblack-5">
+                        Section Name <sup className="text-pink-200">*</sup>
                     </label>
 
                     <input
@@ -117,20 +115,21 @@ const CreateSection = ( ) => {
                       {...register("sectionName",{
                         required:true
                       })}
-                      className='w-full text-richblack-800'
+                      className='w-full bg-richblack-800 border text-richblack-25  border-richblack-700 rounded-lg py-1 px-16 text-lg  font-medium'
                     />
                     {
-                      errors.sectionName && <p>Section name is required</p>
+                      errors.sectionName && <p className="ml-2 text-xs tracking-wide text-pink-200">Section name is required</p>
                     }
               </div>
-              <div className='mt-10 flex w-full'>
+              <div className="flex items-end gap-x-4">
                     <IconBtn
+                    disabled={loading}
                     type={"submit"}
                     text={editSectionName ? ("Edit section name") : ("Create section name")}
                     outline={true}
-                    customCLass={"text-richblack-50 bg-yellow-50 flex"}
+                    customCLass={"text-richblack-25  bg-yellow-50 flex flex-row  gap-3 px-4 py-2 rounded-md"}
                     >
-                      <IoAddCircleOutline className='bg-yellow-50 text-yellow-5' size={20} /> 
+                      <IoAddCircleOutline className=' text-yellow-5' size={20} /> 
                     </IconBtn>
 
                     {
@@ -154,13 +153,15 @@ const CreateSection = ( ) => {
 
             <div className='flex justify-end gap-x-4'>
                 <button
+                disabled={loading}
                 onClick={goBack}
-                className='text-richblack-50 bg-richblack-600 py-1 px-3 rounded-md'
+                className={`flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-[8px] px-[20px] font-semibold text-richblack-900`}
                 >
                     back
                 </button>
 
                 <IconBtn
+                disabled={loading}
                 text={"Next"}
                 onclick={goToNext}
                 customCLass={"text-richblack-800 px-4 py-1 bg-yellow-50 rounded-md flex gap-1 item-center"}

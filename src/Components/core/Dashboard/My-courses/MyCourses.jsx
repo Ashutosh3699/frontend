@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../../../common/loader/Loading';
-import { getAccountCourses } from '../../../../services/operations/profileApi';
+import { IoIosAddCircle } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 import { fetchInstructorCourses } from '../../../../services/operations/courseApi';
 import IconBtn from '../../../common/IconBtn';
@@ -14,14 +14,14 @@ const MyCourses = () => {
     const  [courses, setCourses] = useState([]);
     const [loading,setLoading] = useState(false);
 
-    const dispatch = useDispatch();
-
     const fetchCourses = async()=>{
+        setLoading(true);
         const result = await fetchInstructorCourses(token);
         // console.log("result", result);
         if(result){
             setCourses(result);
         }
+        setLoading(false);
     }
 
     useEffect(() => {
@@ -43,7 +43,10 @@ const MyCourses = () => {
                     <IconBtn
                         text={"Add course"}
                         onclick={()=>navigate("/dashboard/add-course")}
-                    />
+                        customCLass={"px-3 py-1 text-richblack-500 rounded-lg"}
+                    >
+                        <IoIosAddCircle/>
+                    </IconBtn>
                 </div>
 
                 {

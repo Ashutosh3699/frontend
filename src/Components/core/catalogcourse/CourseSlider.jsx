@@ -1,11 +1,14 @@
 import React from 'react'
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import 'swiper/css/autoplay';
-import 'swiper/css/pagination';
-import { FreeMode,Pagination } from 'swiper/modules';
-import { Course_Card } from './Course_Card';
 import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
+// import required modules
+import { Autoplay, Navigation } from 'swiper/modules';
+import  {CourseCardContent} from "./Course_Card";
 
 
 const CourseSlider = ({Courses}) => {
@@ -16,16 +19,31 @@ const CourseSlider = ({Courses}) => {
           <p>No Course Found</p>
         ): (
           <Swiper
-          pagination={true} 
-          slidesPerView={1}
-          loop={true}
-          modules={[Pagination]}
+          spaceBetween={30}
+          centeredSlides={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          navigation={true}
+          breakpoints={{
+          640: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 4,
+          },
+          1024: {
+            slidesPerView: 4,
+          },
+        }}
+          modules={[Autoplay, Navigation]}
           >
 
             {
               Courses?.map((course,index)=>(
                 <SwiperSlide key={index}>
-                    <Course_Card  course={course} height={"h-[250px]"} />
+                    <CourseCardContent  course={course} height={"h-[250px]"} />
                 </SwiperSlide>
               ))
             }

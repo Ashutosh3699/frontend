@@ -21,7 +21,7 @@ const ConfirmationModal = ({modalData}) => {
                 onclick={modalData?.btn1Handler}
                 text = {modalData?.btn1text}
                 type="submit"
-                customCLass={"text-richblack-50 "}
+                customCLass={"text-richblack-500 py-[8px] px-[20px]  rounded-md cursor-pointer font-semibold "}
                 />
 
                 <button onClick={modalData?.btn2Handler}

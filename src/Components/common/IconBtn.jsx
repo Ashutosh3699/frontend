@@ -3,13 +3,15 @@ import React from 'react'
 const IconBtn = ({text,children,type,disabled=false,outline,onclick,customCLass }) => {
   return (
     <button
-    type={type}
-    disabled={disabled}
-    onClick = {onclick}
-    className={customCLass}
+     disabled={disabled}
+        onClick={onclick}
+        className={`flex items-center ${
+          outline ? "border border-yellow-50 bg-transparent" : "bg-yellow-50"
+        }  ${customCLass}`}
+        type={type}
     >
         {
-          children ? (<div>
+          children ? (<div className='flex flex-row gap-3 items-center'>
             <div>{text}</div>
              {children}
           </div>) :(text)

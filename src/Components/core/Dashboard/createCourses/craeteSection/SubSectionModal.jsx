@@ -134,21 +134,23 @@ const SubSectionModal = ({
 
 
   return (
-    <div>
+    <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
 
-            <div>
+            <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-richblack-400 bg-richblack-800">
 
-                   <div>
-                   <h2>{view ? ("Viewing") : edit ? ("Editing") : add ? ("Adding") : ("")} Lecture</h2>
+                   <div className="flex items-center justify-between rounded-t-lg bg-richblack-700 p-5">
+                   <h2  className="text-xl font-semibold text-richblack-5 ">{view ? ("Viewing") : edit ? ("Editing") : add ? ("Adding") : ("")} Lecture</h2>
 
-                        <IconBtn
-                        onclick={()=>(!loading ? setModalData(null) : {})}
+                        <button
+                        onClick={()=>(!loading ? setModalData(null) : {})}
                         >
-                            <RxCross2/>
-                        </IconBtn>
+                            <RxCross2 className="text-2xl text-richblack-5"/>
+                        </button>
                    </div>
 
-                   <form onSubmit={handleSubmit(onsubmit)}>
+                   <form onSubmit={handleSubmit(onsubmit)}
+                     className="space-y-8 px-8 py-10"
+                   >
                             
                             <CourseImageUploader
                                 name={"lectureVideo"}
@@ -161,32 +163,34 @@ const SubSectionModal = ({
                                 editData={edit? modalData?.video : null}
                             />
 
-                            <div>
+                            <div className="flex flex-col space-y-2">
 
-                                    <label htmlFor='title'>Lecture Title</label>
+                                    <label htmlFor='title' className="text-sm text-richblack-5">Lecture Title {!view && <sup className="text-pink-200">*</sup>}</label>
                                     <input
                                         id='title'
                                         name='title'
                                         placeholder='Enter Lecture Name'
-                                        className='w-full'
+                                        className='w-full bg-richblack-800 border text-richblack-25  border-richblack-700 rounded-lg py-1 px-6 text-lg  font-medium'
                                         {...register("lectureTitle",{required:true})}
                                     />
                                     {
-                                        errors.lectureTitle && (<span>Title is required</span>)
+                                        errors.lectureTitle && (<span className="ml-2 text-xs tracking-wide text-pink-200">Title is required</span>)
                                     }
                             </div>
 
-                            <div>
-                                <label htmlFor='lectureDesc'>Lecture Description</label>
+                            <div className="flex flex-col space-y-2">
+                                <label htmlFor='lectureDesc' className="text-sm text-richblack-5" >Lecture Description
+                                {!view && <sup className="text-pink-200">*</sup>}
+                                </label>
                                 <textarea
                                     id='lectureDesc'
                                     name='lectureDesc'
                                     placeholder='Enter Lecture Description'
-                                    className='w-full min-h-[130px]'
+                                    className='w-full bg-richblack-800 border text-richblack-25 min-h-[130px]  border-richblack-700 rounded-lg py-1 px-4 text-lg  font-medium'
                                     {...register("lectureDesc",{required:true})}
                                 />
                                 {
-                                    errors.lectureDesc && (<span>description is required</span>)
+                                    errors.lectureDesc && (<span className="ml-2 text-xs tracking-wide text-pink-200">description is required</span>)
                                 }
                             </div>
 
@@ -195,7 +199,7 @@ const SubSectionModal = ({
                                   <div>
                                         <IconBtn
                                             text={loading ? "loading..." : edit ? "save changes" : "save"}
-                                            customCLass={"bg-yellow-50 text-richblack-400 px-3 py-1"}
+                                            customCLass={"bg-yellow-50 text-richblack-500 text-xl flex items-center  rounded-md  px-3 py-1"}
                                             type={"submit"}
                                         />
                                   </div>

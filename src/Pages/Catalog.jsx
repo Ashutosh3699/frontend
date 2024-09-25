@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { apiConnector } from '../services/apiConnector';
 import { categories } from '../services/apis';
 import { getCatalogPageData } from '../services/operations/PageAndComponentData';
-import { Course_Card } from '../Components/core/catalogcourse/Course_Card';
+import { CourseCardContent } from '../Components/core/catalogcourse/Course_Card';
 
 const Catalog = () => {
 
@@ -97,7 +97,7 @@ const Catalog = () => {
                                         catalogCourse?.mostSellingCourses?.length === 0 ? (<p>No Courses available</p>) : (
                                             catalogCourse?.mostSellingCourses?.splice(0,4)
                                             .map((course,index)=>(
-                                                <Course_Card   course={course} key={index} height={"h-[400px]"}   />
+                                                <CourseCardContent   course={course} key={index} height={"h-[400px]"}   />
                                             ))
                                         )
                                     }
