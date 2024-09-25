@@ -6,11 +6,11 @@ const reviewAndRatingSchema = new  mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref:"User"
     },
-    Rating: {
+    rating: {
         type:Number,
         required:true,
     },
-    Review: {
+    review: {
         type:String,
         required:true
     },

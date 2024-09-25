@@ -40,8 +40,8 @@ exports.createRatingandReview = async(req,res)=>{
         // create the review
         const createRating = await RatingAndReview.create({
             user:userId,
-            Rating:rating,
-            Review:review,
+            rating,
+            review,
             course:courseId
         })
 

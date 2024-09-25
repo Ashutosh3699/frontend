@@ -8,6 +8,7 @@ import { FaChevronDown, FaShoppingCart  } from "react-icons/fa";
 import ProfileDropDown from '../core/AuthTemplate/ProfileDropDown';
 import { apiConnector } from '../../services/apiConnector';
 import { categories } from '../../services/apis';
+import Loading from './loader/Loading';
 // import cart from "../../features/cartSlice"
 
 const Navbar = () => {
@@ -15,35 +16,34 @@ const Navbar = () => {
     const {token} = useSelector((state) => state.auth);
     const {user} = useSelector((state) => state.profile);
     const cart = useSelector((state) => state.cart);
+    const [loading,setLoading] = useState(false);
 
     const [subLinks, setSubLinks] = useState([]);
 
     const fetchSubLinks = async()=>{
 
+      setLoading(true);
       try {
-
         const result = await apiConnector("GET", categories.CATEGORY_API);
         setSubLinks(result.data.data);
-        
+        // console.log("sublinks are: ", result);
 
       } catch (error) {
         console.log("Error at fetching the sublinks from catalog")
       }
+      setLoading(false);
     }
 
     useEffect(() => {
       fetchSubLinks();
     }, [])
     
-    // console.log("token is : ", token);
-    // console.log("token is at local storage : ", localStorage);
-    // console.log(" url is : ", process.env.REACT_APP_BASE_URL);
     
     const location = useLocation();
     const matchRoute=(route)=>{
       return matchPath({path:route}, location.pathname);
     }
-
+    // console.log("sublinks; ", subLinks);
 
   return (
     <div className='w-full   bg-richblack-900  text-richblack-25  border border-richblack-700'>
@@ -61,8 +61,12 @@ const Navbar = () => {
                      {
                       navItem.title === "Catalog" ?
                        (
-                          <div className='cursor-pointer font-edu-sa text-richblack-25 flex gap-2 items-center  relative group'>
-                              {navItem.title}
+                          <div className={`group relative flex cursor-pointer items-center gap-1 ${
+                        matchRoute("/catalog/:catalogName")
+                          ? "text-yellow-25"
+                          : "text-richblack-25"
+                      }`}>
+                             <p>{navItem.title}</p> 
                               <FaChevronDown />
 
                                 <div  className=' invisible absolute  -left-44  top-[160%] flex flex-col justify-center items-center rounded-md
@@ -71,21 +75,30 @@ const Navbar = () => {
 
                                    <div className='absolute w-6 h-6 bg-richblack-5  rounded-md rotate-45 
                                     -top-2  right-10 z-0'></div>
-
                                     {
-                                      subLinks.length ? 
-                                      (
-                                       subLinks.map((item,index) => (
-                                        <Link  to={`/catalog/${item.categoryName}`}  key={index}  className=' uppercase hover:bg-richblack-50 rounded-md w-[95%] flex 
-                                        justify-center items-center'>
-                                          {item.categoryName}
-                                        </Link>
-                                       ))
-                                      ) : 
-                                      (
-                                        <div></div>
+                                      loading ?(<Loading/>) : (
+                                        subLinks.length ? 
+                                          (
+                                          subLinks?.
+                                          filter(
+                                            (subLinks)=>subLinks?.course?.length > 0
+                                          )?.
+                                          map((item,index) => (
+                                            <Link  
+                                            to={`/catalog/${item.categoryName?.
+                                            split(" ").
+                                            join("-").
+                                            toLowerCase()}`}  
+                                            key={index}  className=' uppercase hover:bg-richblack-50 rounded-md w-[95%] flex 
+                                            justify-center items-center'>
+                                              {item.categoryName}
+                                            </Link>
+                                          ))
+                                          ) : 
+                                          (  <p className="text-center text-black">No Courses Found</p>)
                                       )
                                     }
+                                   
 
                                 </div>
 

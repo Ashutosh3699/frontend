@@ -23,6 +23,7 @@ import Cart from "./Components/core/Dashboard/cart/Cart";
 import MyCourses from "./Components/core/Dashboard/My-courses/MyCourses";
 import AddCourses from "./Components/core/Dashboard/createCourses";
 import EditCourse from "./Components/core/Dashboard/editcourse/EditCourse";
+import Catalog from "./Pages/Catalog";
 
 
 function App() {
@@ -39,6 +40,12 @@ function App() {
           path="/" 
           element={
               <Home/>
+          }  
+          />
+          <Route  
+          path="/catalog/:catalogName" 
+          element={
+              <Catalog/>
           }  
           />
           <Route  

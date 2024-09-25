@@ -41,7 +41,7 @@ courseRouter.post("/createCategory",isAuth,isAdmin, createCategory);
 
 courseRouter.get("/getAllCategory", getAllCategory);
 
-courseRouter.get("/CategoryPageDetails", CategoryPageDetails);
+courseRouter.post("/CategoryPageDetails", CategoryPageDetails);
 
 // creating all the router for courses sections
 courseRouter.post("/createSection",isAuth,isInstructor, createSection);
