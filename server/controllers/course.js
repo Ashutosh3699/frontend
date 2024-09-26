@@ -238,13 +238,13 @@ exports.editCourseDetails = async(req,res)=>{
 exports.getFullCourseDetails= async(req,res)=>{
     try {
         const { courseId } = req.body;
-        const userId = req.user.id;
+        // const userId = req.user.id;
 
         const courseDetails = await Courses.findOne({_id:courseId})
         .populate({
             path:"instructor",
             populate:{
-                path:"accountType",
+                path:"accountDetails",
             }
         }).populate("category")
         .populate("reviewAndRating")

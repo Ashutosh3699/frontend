@@ -18,7 +18,7 @@ const Catalog = () => {
 
         const getCategories  = async()=>{
             const res = await apiConnector("GET",categories.CATEGORY_API );
-            console.log("res is category : ", res);
+            // console.log("res is category : ", res);
             const  category_id = 
             res?.data?.data?.filter((ct)=> ct.categoryName?.split(" ")?.join("-")?.toLowerCase() === catalogName)[0]._id;
             setCategoryId(category_id);
@@ -32,7 +32,7 @@ const Catalog = () => {
             try {
                 const res = await getCatalogPageData(categoryId);
                 setCatalogCourse(res);
-                console.log("res is :", res);
+                // console.log("res is :", res);
             } catch (error) {
                 console.log("Error at getting Catgory Details",error);
             }
@@ -48,15 +48,23 @@ const Catalog = () => {
   return (
     <div className='text-richblack-50 bg-richblack-900 w-full  '>
 
-        <div>
-                <div>
-                    <p>{`Home  /  Catalog  /  ` } <span>{catalogCourse?.getCoursebyCategory?.categoryName}</span></p>
-                    <p>{catalogCourse?.getCoursebyCategory?.categoryName}</p>
-                    <p>{catalogCourse?.getCoursebyCategory?.description}</p>
+        <div className='w-full bg-richblack-800 flex items-center py-10 justify-around gap-10'>
+                <div className='flex flex-col gap-y-2 items-start leading-4'>
+                    <p className='text-richblack-500 font-semibold'>{`Home  /  Catalog  /  ` } <span className='text-yellow-50 text-lg  font-semibold'>{catalogCourse?.getCoursebyCategory?.categoryName}</span></p>
+                    <p className='text-richblack-100 text-4xl font-bold'>{catalogCourse?.getCoursebyCategory?.categoryName}</p>
+                    <p className='text-richblack-200 text-base'>{catalogCourse?.getCoursebyCategory?.description}</p>
                 </div>
 
                 <div>
-                    Side Notes
+                <h2 className='text-richblack-200 text-xl font-semibold'>Related to course</h2>
+                   <ul className='px-2 mt-2 text-richblack-300 font-edu-sa'>
+                        <li>Doc {catalogCourse?.getCoursebyCategory?.categoryName}</li>
+                        <li>CheatSheets</li>
+                        <li>Articles</li>
+                        <li>Community forums</li>
+                        <li>Projects</li>
+                   </ul>
+
                 </div>
         </div>
 

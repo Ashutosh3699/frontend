@@ -50,25 +50,25 @@ const ProfileDropDown = () => {
     </div>
 
       <div  
-      className={`${attributeclass} absolute -left-32 top-[160%] flex flex-col justify-center items-center rounded-md
-                                   bg-richblack-5  p-4  text-richblack-800   duration-400  transition-all 
-                                    lg:w-[200px]  z-10  gap-2`}>
+      className={`${attributeclass} absolute -left-20 top-[160%] flex flex-col justify-center items-center rounded-md
+                                   bg-richblack-700  py-4  text-richblack-800   duration-400  transition-all 
+                                    lg:w-[150px]  z-10  gap-2`}>
 
-            <div className='absolute w-6 h-6 bg-richblack-5  rounded-md rotate-45 
-            -top-2  right-10 z-0'></div>
+            <div className='absolute w-6 h-6 bg-richblack-700  rounded-md rotate-45 
+            -top-2  right-10 '></div>
 
-            <Link  to={"/dashboard/my-profile"}>
-            <div className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-300 hover:bg-richblack-700 hover:text-richblack-25">
+            <Link  to={"/dashboard/my-profile"}
+             className="flex w-full items-center justify-center z-10 gap-x-1 py-[10px] px-3 text-sm text-richblack-200 hover:bg-richblack-500 hover:text-richblack-25"
+            >
               <VscDashboard className="text-lg" />
               Dashboard
-            </div>
             </Link>
 
             <div
             onClick={() => {
               dispatch(logout(navigate))
             }}
-            className="flex w-full items-center justify-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-300 hover:bg-richblack-700 hover:text-richblack-25"
+            className="flex w-full items-center justify-center gap-x-1 py-[10px] px-3 text-sm text-richblack-200 hover:bg-richblack-500 hover:text-richblack-25"
           >
             <VscSignOut className="text-lg" />
             Logout

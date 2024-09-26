@@ -24,6 +24,7 @@ import MyCourses from "./Components/core/Dashboard/My-courses/MyCourses";
 import AddCourses from "./Components/core/Dashboard/createCourses";
 import EditCourse from "./Components/core/Dashboard/editcourse/EditCourse";
 import Catalog from "./Pages/Catalog";
+import CourseDetail from "./Components/core/catalogcourse/courseDetail/CourseDetail";
 
 
 function App() {
@@ -48,6 +49,14 @@ function App() {
               <Catalog/>
           }  
           />
+
+        <Route  
+          path="/courses/:courseId" 
+          element={
+              <CourseDetail/>
+          }  
+          />
+
           <Route  
           path="/login" 
           element={

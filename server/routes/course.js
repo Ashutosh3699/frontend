@@ -19,7 +19,7 @@ courseRouter.get("/getAllcourses",  getAllcourses);
 // Get Details for a Specific Courses
 courseRouter.post("/getCourseDetails",  getCourseDetails);
 // Get Details for a Specific Courses
-courseRouter.post("/getFullCourseDetails", isAuth ,getFullCourseDetails);
+courseRouter.post("/getFullCourseDetails" ,getFullCourseDetails);
 // Edit Course routes
 courseRouter.post("/editCourseDetails",isAuth, isInstructor, editCourseDetails);
 // Get all Courses Under a Specific Instructor

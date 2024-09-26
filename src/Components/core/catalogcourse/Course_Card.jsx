@@ -10,7 +10,10 @@ export const CourseCardContent = ({course, height}) => {
   useEffect(()=>{
       const count = GetAvgRating(course?.reviewAndRating);
       setAvgReviewCount(count)
-  },[course])
+  },[course]);
+
+  // console.log("course is; ", course);
+  // console.log("avg count is: ", avgReviewCount);
 
   return (
     <div>
@@ -33,7 +36,7 @@ export const CourseCardContent = ({course, height}) => {
                           <div>
                               <span>{avgReviewCount}</span>
                               <RatingStars  Review_Count={avgReviewCount}/>
-                              <span>{course?.user?.length}</span>
+                              <span>{course?.studentEnrolled?.length}</span>
                           </div>
                         {/* price */}
                           <p>{course?.price}</p>

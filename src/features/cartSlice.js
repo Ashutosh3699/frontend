@@ -26,6 +26,7 @@ export const cartslice = createSlice({
         addItems: (state, action) =>{
 
             const course = action.payload;
+            console.log("course is:", course);
             const index = state.carts.findIndex((item) => item._id === course._id);
 
             if (index >= 0) {
