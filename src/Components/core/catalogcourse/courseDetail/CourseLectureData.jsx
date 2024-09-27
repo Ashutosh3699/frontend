@@ -20,11 +20,11 @@ const CourseLectureData = ({sections, courseDuration}) => {
     },[])
 
   return (
-    <div className='w-[90%] mx-auto py-3  flex flex-col gap-3 '>
+    <div className='w-[90%] mx-auto py-3  flex flex-col gap-3  '>
 
-        <h3>Course Content</h3>
+        <h3 className='text-2xl font-semibold text-richblack-50'>Course Content</h3>
 
-        <p className='flex items-center gap-3'>
+        <p className='flex items-center gap-3 text-xs'>
             <span>{sections?.length} sections</span>
             <span>{totalLecture} lectures</span>
             <span>{courseDuration} total length</span>
@@ -37,7 +37,7 @@ const CourseLectureData = ({sections, courseDuration}) => {
                     <details  key={lecture._id}>
 
                             <summary className='flex justify-between items-center border
-                                         border-richblack-500  px-5 py-2 border-b-4 border-b-richblack-200 '>
+                                         border-richblack-500  px-5 py-2 border-b-4 border-b-richblack-200 bg-richblack-700'>
 
                                         <div className='flex justify-between items-center gap-x-3 '>
                                                 <IoIosArrowUp className="text-2xl text-richblack-50"/>

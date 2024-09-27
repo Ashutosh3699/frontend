@@ -5,11 +5,11 @@ const CourseSectionData = ({course}) => {
 
     console.log("course is: ", course);
   return (
-    <div className='w-[60%] py-8 border border-richblack-500  '>
+    <div className='w-[60%] py-8 '>
 
-        <div className='w-[90%] mx-auto py-3 '>
+        <div className='w-[90%] mx-auto py-3 border border-richblack-600 px-5 flex flex-col gap-3 '>
 
-                <h3>What you will learn</h3>
+                <h3 className='text-xl text-richblack-50 font-semibold'>What you will learn</h3>
 
                 <div>
                      <p>{course?.courseDetails?.whatWeWillLearn}</p>
@@ -22,7 +22,7 @@ const CourseSectionData = ({course}) => {
         </div>
 
         {/* course sections */}
-       <div>
+       <div className='mt-4'>
             <CourseLectureData sections={ course?.courseDetails?.courseContent} courseDuration={course?.totalDuration} />
        </div>
 
