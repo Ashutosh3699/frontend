@@ -7,26 +7,28 @@ import ReactStars from "react-rating-stars-component";
 
 const RenderCartCourse = () => {
 
-  const {cart} = useSelector((state)=>state.cart);
+  const {carts} = useSelector((state)=>state.cart);
   const dispatch = useDispatch();
+
+  console.log("carts is: ", carts);
 
   return (
     <div>
     
       {
-        cart.map((course,index) => {
+        carts.map((course,index) => {
 
           return (<div key={index}>
 
-                <div>
+                <div className='text-richblack-100 '>
 
                       <div>
-                          <img  src={course?.image}  alt='course-image1' />
+                          <img  src={course?.thumbnail}  alt='course-image1' />
                       </div>
 
                       <div>
                           <h3>{course?.courseName}</h3>
-                          <p>{course?.category?.name}</p>
+                          <p>{course?.category?.categoryName}</p>
 
                           <div>
                               <span>4.8</span>
@@ -39,7 +41,7 @@ const RenderCartCourse = () => {
                                 activeColor="#ffd700"
                               />
 
-                              <span>{course?.ratingAndReview?.length} Ratings</span>
+                              <span>{course?.reviewAndRating?.length} Ratings</span>
                           </div>
 
                       </div>

@@ -41,8 +41,8 @@ export const  ratingAndReview = {
 // student ENDPOINTS 
 export const payment_course= {
     COURSE_PAYMENT_API: BASE_URL + "/paymentRouter/capturePayment",
-    COURSE_VERIFY_API: BASE_URL + "/paymentRouter/verifySignature",
-    SEND_PAYMENT_SUCCESS_EMAIL_API: BASE_URL + "/paymentRouter/sendPaymentSuccessEmail",
+    COURSE_VERIFY_API: BASE_URL + "/paymentRouter/verifyPayment",
+    SEND_PAYMENT_SUCCESS_EMAIL_API: BASE_URL + "/paymentRouter/sendSuccessPaymentMail",
 }
 
 // courses ENDPOINTS

@@ -3,11 +3,24 @@ import { IoIosTimer } from "react-icons/io";
 import { FaMousePointer,FaMobileAlt  } from "react-icons/fa";
 import { GrCertificate } from "react-icons/gr";
 import { addItems } from '../../../../features/cartSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { buyCourse } from '../../../../services/operations/studentFeaturesApi';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const BuyCourseCard = ({course}) => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const {token} = useSelector((state)=>state.auth);
+    const {user} = useSelector((state)=>state.profile);
+    const {courseId} = useParams();
+
+    const handleBuyFunction= ()=>{
+      if(token){
+         buyCourse(token, [courseId], user, navigate, dispatch)
+        return;
+      }
+    }
 
   return (
     <div className='w-[300px] bg-richblack-700 flex flex-col gap-2 rounded-md overflow-hidden'>
@@ -24,6 +37,7 @@ const BuyCourseCard = ({course}) => {
                     className='bg-yellow-50 text-richblack-700 py-2 w-[90%] rounded-md'
                     >Add to Cart</button>
                     <button
+                    onClick={()=>handleBuyFunction()}
                     className=' bg-richblack-800 text-richblack-5 font-semibold py-2 w-[90%] rounded-md border-b-2 border-richblack-500'
                     >Buy now</button>
                     <p className='text-xs text-caribbeangreen-50'>30-Day Money-Back Guarantee</p>
