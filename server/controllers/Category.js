@@ -54,6 +54,7 @@ exports.getAllCategory = async(req,res) =>{
             description:true,
             course:true,
         });
+        // console.log("response", response);
 
         res.status(200).json({
             success:true,
@@ -83,7 +84,7 @@ exports.CategoryPageDetails = async(req,res)=>{
                 path:"instructor"
             }
         }).exec();
-        console.log("getCoursebyCategory is:  ",getCoursebyCategory);
+        // console.log("getCoursebyCategory is:  ",getCoursebyCategory);
         // validation
         if(!getCoursebyCategory){
 
@@ -100,7 +101,7 @@ exports.CategoryPageDetails = async(req,res)=>{
 				message: "No courses found for the selected category.",
 			});
 		}
-        console.log("getCoursebyCategory is:  ",getCoursebyCategory);
+        // console.log("getCoursebyCategory is:  ",getCoursebyCategory);
         // get courses for different categories
         const categoriesExceptSelected  = await Category.find({
             _id: {$ne:categoryId}
@@ -117,7 +118,7 @@ exports.CategoryPageDetails = async(req,res)=>{
                 }
             })
             .exec()
-            console.log("Different COURSE", differentCategory)
+            // console.log("Different COURSE", differentCategory)
 
         // get top 10 selling courses *******************crosscheck*************************
         // ********************************************testing********************************
@@ -133,7 +134,7 @@ exports.CategoryPageDetails = async(req,res)=>{
         const mostSellingCourses = allCourses
           .sort((a, b) => b.sold - a.sold)
           .slice(0, 10)
-         console.log("mostSellingCourses COURSE", mostSellingCourses)
+        //  console.log("mostSellingCourses COURSE", mostSellingCourses)
 
         // return response
         return res.status(200).json({

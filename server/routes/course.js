@@ -8,9 +8,12 @@ const {createCategory, getAllCategory, CategoryPageDetails} = require("../contro
 const {createRatingandReview, getAllratingOfCourse, getAvgRating, getAllrating} = require("../controllers/RatingAndReview");
 const {createSection,updateSection,deleteSection} = require("../controllers/sectionCourse");
 const {createSubSection,updateSubSection,deleteSubSection} = require("../controllers/subSectionCourse");
+const {updateCourseProgress } = require("../controllers/CourseProgress")
 
 // import middleware for auth
 const {isAuth, isStudent, isInstructor, isAdmin} = require("../middleware/Auth");
+
+courseRouter.post("/updateCourseProgress", isAuth,isStudent,updateCourseProgress);
 
 // creating all the router for courses
 courseRouter.post("/createCourse",isAuth,isInstructor, createCourse);

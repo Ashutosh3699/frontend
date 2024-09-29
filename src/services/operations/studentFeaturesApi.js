@@ -1,11 +1,13 @@
 import toast from "react-hot-toast";
-import {payment_course} from "../apis";
+import {payment_course, profileEndpoints} from "../apis";
 import rzp_logo  from "../../assets/Logo/rzp_logo.png"
 import { apiConnector } from "../apiConnector";
 import { setPaymentLoading } from "../../features/courseSlice";
 import { resetCart } from "../../features/cartSlice";
+import { setUser } from "../../features/profileSlice";
 
 const {COURSE_PAYMENT_API, COURSE_VERIFY_API,SEND_PAYMENT_SUCCESS_EMAIL_API} =payment_course;
+const {GET_USER_DETAILS_API} = profileEndpoints
 
 function loadScript(src){
 
@@ -113,8 +115,14 @@ const verifyPayment=async(bodyData,token,navigate,dispatch)=>{
         if(!response.data.success) {
             throw new Error(response.data.message);
         }
+
+        const res = await apiConnector("GET",GET_USER_DETAILS_API,null,{
+            Authorization: `Bearer ${token}`
+        });
+        console.log("res",res);
         toast.success("payment Successful, ypou are addded to the course");
         navigate("/dashboard/enrolled-courses");
+        dispatch(setUser(res?.data?.data));
         dispatch(resetCart());
 
     } catch (error) {

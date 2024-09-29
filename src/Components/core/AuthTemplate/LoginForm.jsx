@@ -35,6 +35,8 @@ const LoginForm = () => {
         }));
 
         const {email,password} = loginData;
+        console.log("email", email);
+        console.log("pass: ",password);
         dispatch(login(email,password,navigate));
         // reset the form again
         setLoginData({

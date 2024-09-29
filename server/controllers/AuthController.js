@@ -161,6 +161,7 @@ exports.logIn = async(req,res) =>{
     try {
         // fetch data email and password
         const  {email,password} = req.body;
+        console.log("req login:", req.body);
         // validation
         if(!email || !password){
             return res.status(400).json({
@@ -169,6 +170,7 @@ exports.logIn = async(req,res) =>{
             })
         }
         const  data = await User.findOne({email}).populate("accountDetails").exec();
+        console.log("data is:", data);
         // check password
         const response = await bcrypt.compare(password,data.password);
         if(!response){

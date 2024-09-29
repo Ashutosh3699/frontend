@@ -18,7 +18,7 @@ const Catalog = () => {
 
         const getCategories  = async()=>{
             const res = await apiConnector("GET",categories.CATEGORY_API );
-            // console.log("res is category : ", res);
+            console.log("res is category : ", res);
             const  category_id = 
             res?.data?.data?.filter((ct)=> ct.categoryName?.split(" ")?.join("-")?.toLowerCase() === catalogName)[0]._id;
             setCategoryId(category_id);

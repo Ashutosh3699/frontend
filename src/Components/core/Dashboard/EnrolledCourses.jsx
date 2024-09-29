@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getEnrolledCourses } from '../../../services/operations/profileApi';
 import Loading from "../../common/loader/Loading";
 import ProgressBar from "@ramonak/react-progress-bar";
+import { useNavigate } from 'react-router-dom';
 
 const EnrolledCourses = () => {
 
     const {token, loading} = useSelector((state)=>state.auth);
     const [enrolledCourses, setEnrolledCourses] = useState([]);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const fetchEnrolledCourse = ()=>{
         dispatch(getEnrolledCourses(token, setEnrolledCourses));
@@ -53,7 +55,9 @@ const EnrolledCourses = () => {
                                 key={index}
                                 >
 
-                                    <div className="flex w-[45%] cursor-pointer items-center gap-4 px-5 py-3">
+                                    <div className="flex w-[45%] cursor-pointer items-center gap-4 px-5 py-3"
+                                    onClick={()=>navigate(`/view-course/${course?._id}/section/${course?.courseContent?.[0]._id}/sub-section/${course.courseContent?.[0]?.videoUrl?.[0]._id}`)}
+                                    >
                                             <img  src={course?.thumbnail}
                                                 alt="course_img"
                                                 className="h-14 w-14 rounded-lg object-cover"

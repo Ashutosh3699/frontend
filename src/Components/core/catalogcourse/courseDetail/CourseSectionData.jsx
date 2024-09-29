@@ -3,7 +3,6 @@ import CourseLectureData from './CourseLectureData';
 
 const CourseSectionData = ({course}) => {
 
-    console.log("course is: ", course);
   return (
     <div className='w-[60%] py-8 '>
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import logo from "../../assets/Logo/Logo-Full-Light.png";
 import {NavbarLinks} from "../../data/navbar-links"
-import { Link, matchPath } from 'react-router-dom';
+import { Link, matchPath, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { FaChevronDown, FaShoppingCart  } from "react-icons/fa";
@@ -17,6 +17,7 @@ const Navbar = () => {
     const {user} = useSelector((state) => state.profile);
     const cart = useSelector((state) => state.cart);
     const [loading,setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const [subLinks, setSubLinks] = useState([]);
 
@@ -25,8 +26,8 @@ const Navbar = () => {
       setLoading(true);
       try {
         const result = await apiConnector("GET", categories.CATEGORY_API);
+        console.log("sublinks are: ", result);
         setSubLinks(result.data.data);
-        // console.log("sublinks are: ", result);
 
       } catch (error) {
         console.log("Error at fetching the sublinks from catalog")
@@ -120,7 +121,7 @@ const Navbar = () => {
         <div  className='flex flex-row gap-4 items-center'>
           {
             user && user.accoutType !== "Instructor" && (
-              <div className='relative  flex flex-row gap-1  items-center'>
+              <div className='relative  flex flex-row gap-1  items-center cursor-pointer' onClick={()=>navigate("/dashboard/cart")}>
                 <FaShoppingCart />
                 <div>{cart.totalItems}</div>
               </div>

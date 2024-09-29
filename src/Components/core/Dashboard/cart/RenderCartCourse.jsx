@@ -13,27 +13,34 @@ const RenderCartCourse = () => {
   console.log("carts is: ", carts);
 
   return (
-    <div>
+    <div className="flex flex-1 flex-col">
     
       {
         carts.map((course,index) => {
 
-          return (<div key={index}>
+          return (<div key={index}
+          className={`flex w-full flex-wrap items-start justify-between gap-6 ${
+            index !== carts.length - 1 && "border-b border-b-richblack-400 pb-6"
+          } ${index !== 0 && "mt-6"} `}
+          >
 
-                <div className='text-richblack-100 '>
+                <div className="flex flex-1 flex-col gap-4 xl:flex-row">
 
-                      <div>
-                          <img  src={course?.thumbnail}  alt='course-image1' />
+                      <div className="h-[148px] w-[220px] rounded-lg overflow-hidden" >
+                          <img  src={course?.courseDetails?.thumbnail}  
+                           alt={course?.courseName}
+                          className="h-[148px] w-[220px] rounded-lg object-cover" />
                       </div>
 
-                      <div>
-                          <h3>{course?.courseName}</h3>
-                          <p>{course?.category?.categoryName}</p>
+                      <div className="flex flex-col space-y-1">
+                          <h3 className="text-lg font-medium text-richblack-5">{course?.courseDetails?.courseName}</h3>
+                          <p className="text-sm text-richblack-300">{course?.courseDetails?.category?.categoryName}</p>
 
-                          <div>
-                              <span>4.8</span>
+                          <div className="flex items-center gap-2">
+                              <span className="text-yellow-5">4.8</span>
                               <ReactStars
                                 count={5}
+                                value={course?.courseDetails?.ratingAndReviews?.length}
                                 edit={false}
                                 size={20}
                                 emptyIcon={<TiStarFullOutline />}
@@ -41,21 +48,22 @@ const RenderCartCourse = () => {
                                 activeColor="#ffd700"
                               />
 
-                              <span>{course?.reviewAndRating?.length} Ratings</span>
+                              <span  className="text-richblack-400">{course?.courseDetails?.reviewAndRating?.length} Ratings</span>
                           </div>
 
                       </div>
 
-                      <div>
+                      <div className="flex flex-col items-end space-y-2">
 
                           <button
                           onClick={()=> dispatch(removeCard(course?._id))}
+                           className="flex items-center gap-x-1 rounded-md border border-richblack-600 bg-richblack-700 py-3 px-[12px] text-pink-200"
                           >
-                           <AiFillDelete /> <span>Delete</span>
+                           <AiFillDelete /> <span>Remove</span>
                           </button>
 
-                          <h5>
-                             Rs {course?.price} 
+                          <h5 className="mb-6 text-3xl font-medium text-yellow-100">
+                            ₹ {course?.courseDetails?.price} 
                           </h5>
                       </div>
 

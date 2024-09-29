@@ -6,6 +6,8 @@ const mailsender = require("../utils/mailSender");
 const { courseEnrollmentEmail } = require("../mail/template/courseEnrolledTemplate");
 const crypto = require("crypto");
 const { paymentSuccessEmail } = require("../mail/template/paymentSuccessEmail");
+const { FaBullseye } = require("react-icons/fa");
+const CourseProgress = require("../models/CourseProgress");
 
 
 exports.capturePayment = async(req,res)=>{
@@ -15,7 +17,7 @@ exports.capturePayment = async(req,res)=>{
 
     if(courses.length === 0){
 
-        return res.status(404).json({
+        return res.status(200).json({
             success:false,
             message: "Course not found"
         })
@@ -28,14 +30,14 @@ exports.capturePayment = async(req,res)=>{
             course = await Courses.findById(courseId);
             if(!course){
                 return res.status(200).json({
-                    success:false,
+                    success:true,
                     message:"Course not exists"
                 })
             }
             const uid = new mongoose.Types.ObjectId(userId);
             if(course.studentEnrolled.includes(uid)){
-                
-                res.status(200).json({
+                // console.log("uid is:", uid);
+                return res.status(200).json({
                     success:false,
                     message:"Course already exist"
                 })
@@ -44,7 +46,7 @@ exports.capturePayment = async(req,res)=>{
 
         } catch (error) {
             console.log("error at capture payment: ", error);
-            res.status(400).json({
+            return res.status(200).json({
                 success:false,
                 message: error.message
             })
@@ -137,6 +139,12 @@ const enrolledStudent= async( courses , userId, res)=>{
                     studentEnrolled:userId
                 },
             },{new:true});
+            // create a course progress
+            const courseProgress = await CourseProgress.create({
+                courseId:courseId,
+                userId:userId,
+                completedVideo: []
+            })
 
             // console.log("enrolled courses is: ", enrollCourse);
             if(!enrollCourse){
@@ -148,7 +156,8 @@ const enrolledStudent= async( courses , userId, res)=>{
             // find the user and encroll the course
             const enrolledUser = await User.findByIdAndUpdate(userId,{
                 $push:{
-                    accountCourses:courseId
+                    accountCourses:courseId,
+                    courseProgress:courseProgress._id,
                 }
             },{new:true});
             // console.log("enrolled user is: ", enrolledUser);

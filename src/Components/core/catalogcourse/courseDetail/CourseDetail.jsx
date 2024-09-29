@@ -10,7 +10,7 @@ import BuyCourseCard from './BuyCourseCard';
 const CourseDetail = () => {
 
     const {courseId} = useParams();
-    const [loading,setLoading] =useState(false);
+    const [loading,setLoading] =useState(true);
     const [course,setCourse] = useState(null);
 
     useEffect(()=>{
@@ -18,7 +18,7 @@ const CourseDetail = () => {
         const fetchCourseDdta = async()=>{
             setLoading(true);
             const response = await fetchCourseDetails(courseId);
-            console.log(response);
+            // console.log("courses data after fetching si:",response);
             if(response){
                 setCourse(response);
             } else{

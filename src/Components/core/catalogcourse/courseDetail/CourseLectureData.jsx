@@ -4,7 +4,7 @@ import { PiLaptop } from "react-icons/pi";
 
 const CourseLectureData = ({sections, courseDuration}) => {
 
-    console.log("section is:", sections);
+    // console.log("section is:", sections);
     const [totalLecture, setTotalLecture] = useState(0);
 
     useEffect(()=>{

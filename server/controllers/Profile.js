@@ -3,6 +3,8 @@ const Profile = require("../models/Profile");
 const Courses = require("../models/Courses");
 const schedule = require('node-schedule');
 const { fileAndImageUploader } = require("../utils/imageUploader");
+const CourseProgress = require("../models/CourseProgress");
+const { convertSecondsToDuration } = require("../utils/secToDuration");
 
 require("dotenv").config();
 
@@ -120,8 +122,61 @@ exports.getEnrolledCourses = async(req,res)=>{
         const userDetails = await User.findOne({
           _id: userId,
         })
-          .populate("accountCourses")
-          .exec()
+          .populate({
+            path:"accountCourses",
+            populate:{
+                path:"courseContent",
+                populate:"videoUrl"
+            }
+          })
+          .exec();
+
+        //   console.log("user Details is; ", userDetails);
+        let newUser = userDetails.toObject();
+        var SubsectionLength = 0
+	  for (var i = 0; i < newUser.accountCourses.length; i++) {
+		let totalDurationInSeconds = 0
+		SubsectionLength = 0
+		for (var j = 0; j < newUser.accountCourses[i].courseContent.length; j++) {
+
+		  totalDurationInSeconds += newUser.accountCourses[i].courseContent[j].
+          videoUrl.reduce((acc, curr) => acc + parseInt(curr.timeDuration), 0);
+
+        //   console.log("total duration is: ", totalDurationInSeconds);
+
+		  newUser.accountCourses[i].totalDuration = convertSecondsToDuration(totalDurationInSeconds )
+        //   console.log("new course total durTION", newUser.accountCourses[i].totalDuration)
+		  SubsectionLength +=
+          newUser.accountCourses[i].courseContent[j].videoUrl.length;
+        //   console.log("SubsectionLength is       ", SubsectionLength);
+
+		}
+		let courseProgressCount = await CourseProgress.findOne({
+            courseId: userDetails.accountCourses[i]._id,
+            userId
+        })
+
+        // console.log("courseProgressCount is       ", courseProgressCount);
+		courseProgressCount = courseProgressCount?.completedVideo.length
+        console.log("courseProgressCount is   after     ", courseProgressCount);
+
+		if (SubsectionLength === 0) {
+            newUser.accountCourses[i].progressPercentage = 100;
+            console.log("progressPercentage is : ",  newUser.accountCourses[i].progressPercentage)
+		} else {
+		  // To make it up to 2 decimal point
+		  const multiplier = Math.pow(10, 2)
+          newUser.accountCourses[i].progressPercentage =
+			Math.round(
+			  (courseProgressCount / SubsectionLength) * 100 * multiplier
+			) / multiplier
+
+            console.log("progressPercentage is : ",  newUser.accountCourses[i].progressPercentage)
+		}
+	  }
+  
+      console.log("final response us :", newUser.accountCourses);
+
         if (!userDetails) {
           return res.status(400).json({
             success: false,
@@ -130,7 +185,7 @@ exports.getEnrolledCourses = async(req,res)=>{
         }
         return res.status(200).json({
           success: true,
-          data: userDetails.accountCourses,
+          data: newUser.accountCourses,
           message:"user enrolled courses"
         })
 	} catch (error) {
