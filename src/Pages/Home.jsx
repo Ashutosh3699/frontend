@@ -11,6 +11,7 @@ import PathFollower from '../Components/core/HomePage/PathFollower';
 import LearnAnyLanguage from '../Components/core/HomePage/LearnAnyLanguage';
 import InstrutorImage from "../assets/Images/Instructor.png";
 import HomePageExploreContent from '../Components/core/HomePage/HomePageExploreContent';
+import ReviewSlider from '../Components/common/ReviewSlider';
 
 const Home = () => {
   return (
@@ -204,6 +205,12 @@ const Home = () => {
                 
             </div>
 
+        </div>
+
+        <div className='bg-richblack-900  w-full h-full  pt-16  pb-8 flex flex-col gap-4 text-richblack-25 items-center justify-center'>
+            <h3>Rating And Reviews </h3>
+
+            <ReviewSlider/>
         </div>
         
         <Footer/>

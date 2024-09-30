@@ -21,7 +21,8 @@ export const settingEndpoints = {
     UPDATE_PROFILE_API: BASE_URL+ "/profile/updateProfile",
     DELETE_PROFILE_API: BASE_URL+ "/profile/deleteProfile",
     CHANGE_PASSWORD_API: BASE_URL+ "/userRouter/changePassword",
-    UPDATE_PROFILE_PIC_API: BASE_URL+"/profile/updateProfilePic"
+    UPDATE_PROFILE_PIC_API: BASE_URL+"/profile/updateProfilePic",
+    GET_INSTRUCTOR_DATA_API: BASE_URL + "/profile/instructorDashboard",
 }
 
 // categories ENDPOINT
@@ -35,7 +36,7 @@ export const getCategory={
 
 // rating and review ENDPOINT
 export const  ratingAndReview = {
-    RATING_AND_REVIEW_API: BASE_URL +  "/courseRouter/getAllratingOfCourse"
+    RATING_AND_REVIEW_API: BASE_URL +  "/courseRouter/getAllrating"
 }
 
 // student ENDPOINTS 
@@ -43,6 +44,7 @@ export const payment_course= {
     COURSE_PAYMENT_API: BASE_URL + "/paymentRouter/capturePayment",
     COURSE_VERIFY_API: BASE_URL + "/paymentRouter/verifyPayment",
     SEND_PAYMENT_SUCCESS_EMAIL_API: BASE_URL + "/paymentRouter/sendSuccessPaymentMail",
+    
 }
 
 // courses ENDPOINTS

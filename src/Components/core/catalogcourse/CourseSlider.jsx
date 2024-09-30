@@ -38,6 +38,7 @@ const CourseSlider = ({Courses}) => {
           },
         }}
           modules={[Autoplay, Navigation]}
+           className="max-h-[30rem]"
           >
 
             {

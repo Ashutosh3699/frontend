@@ -24,7 +24,7 @@ const CourseLectureData = ({sections, courseDuration}) => {
 
         <h3 className='text-2xl font-semibold text-richblack-50'>Course Content</h3>
 
-        <p className='flex items-center gap-3 text-xs'>
+        <p className='flex items-center gap-3 text-xs text-white'>
             <span>{sections?.length} sections</span>
             <span>{totalLecture} lectures</span>
             <span>{courseDuration} total length</span>

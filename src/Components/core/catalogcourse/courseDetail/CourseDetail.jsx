@@ -32,7 +32,7 @@ const CourseDetail = () => {
     },[courseId])
 
   return (
-    <div className=' min-h-screen bg-richblack-900  text-white '>
+    <div className={`relative w-full bg-richblack-800`}>
         {
             loading ? (
                 <div>
@@ -56,13 +56,6 @@ const CourseDetail = () => {
                             <CourseSectionData  course={course}  />
                         </div>
 
-                    </div>
-
-                    
-
-
-                    <div className='py-12 w-full  mx-auto flex justify-center'>
-                            <h2>Review And Ratings</h2>
                     </div>
 
                 </div>

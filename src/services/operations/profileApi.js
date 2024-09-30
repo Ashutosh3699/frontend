@@ -3,7 +3,8 @@ import {setUser,setLoading} from "../../features/profileSlice";
 import {apiConnector} from "../apiConnector";
 import {settingEndpoints,profileEndpoints} from "../apis"
 
-const {UPDATE_PROFILE_PIC_API,UPDATE_PROFILE_API,CHANGE_PASSWORD_API,DELETE_PROFILE_API} = settingEndpoints;
+const {UPDATE_PROFILE_PIC_API,UPDATE_PROFILE_API,CHANGE_PASSWORD_API
+    ,DELETE_PROFILE_API, GET_INSTRUCTOR_DATA_API} = settingEndpoints;
 const {USER_ENROLLED_COURSE_API} = profileEndpoints
 
 export function updateProfilePic(file,token){
@@ -200,4 +201,25 @@ export function getAccountCourses(token,setMyCourses){
         dispatch(setLoading(false));
         toast.dismiss(toastId);
     }
+}
+
+export async function getInstructorData(token) {
+    const toastId = toast.loading("Loading...");
+    let result = [];
+    try{
+      const response = await apiConnector("GET", GET_INSTRUCTOR_DATA_API, null, 
+      {
+        Authorization: `Bearer ${token}`,
+      })
+  
+      console.log("GET_INSTRUCTOR_API_RESPONSE", response);
+      result = response?.data?.courses
+  
+    }
+    catch(error) {
+      console.log("GET_INSTRUCTOR_API ERROR", error);
+      toast.error("Could not Get Instructor Data")
+    }
+    toast.dismiss(toastId);
+    return result;
 }

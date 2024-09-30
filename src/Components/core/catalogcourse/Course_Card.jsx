@@ -20,26 +20,26 @@ export const CourseCardContent = ({course, height}) => {
 
         <Link to={`/courses/${course._id}`}>
                 <div>
-                    <div>
+                    <div className="rounded-lg">
                       <img src={course?.thumbnail}
                         alt='course thumbnail'
                         className={`${height}  w-full object-fill  rounded-xl`}
                        />
                     </div>
 
-                    <div>
+                    <div className="flex flex-col gap-2 px-1 py-3">
                           {/* course name */}
-                          <p>{course?.courseName}</p>
+                          <p className="text-xl text-richblack-5">{course?.courseName}</p>
                           {/* instructor */}
-                          <p><span>{course?.instructor?.firstName}</span> <span>{course?.instructor?.lastName}</span>  </p>
+                          <p className="text-sm text-richblack-50 flex gap-3"><span>{course?.instructor?.firstName}</span> <span>{course?.instructor?.lastName}</span>  </p>
 
-                          <div>
-                              <span>{avgReviewCount}</span>
+                          <div className="flex items-center gap-2">
+                              <span className="text-yellow-5">{avgReviewCount}</span>
                               <RatingStars  Review_Count={avgReviewCount}/>
-                              <span>{course?.studentEnrolled?.length}</span>
+                              <span className="text-richblack-400">{course?.studentEnrolled?.length}</span>
                           </div>
                         {/* price */}
-                          <p>{course?.price}</p>
+                          <p className="text-xl text-richblack-5">{course?.price}</p>
                     </div>
                 </div>
 

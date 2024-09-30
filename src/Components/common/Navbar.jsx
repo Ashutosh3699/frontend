@@ -9,6 +9,7 @@ import ProfileDropDown from '../core/AuthTemplate/ProfileDropDown';
 import { apiConnector } from '../../services/apiConnector';
 import { categories } from '../../services/apis';
 import Loading from './loader/Loading';
+import { ACCOUNT_TYPE } from '../../utils/constant';
 // import cart from "../../features/cartSlice"
 
 const Navbar = () => {
@@ -120,7 +121,7 @@ const Navbar = () => {
         {/* login and dashboard */}
         <div  className='flex flex-row gap-4 items-center'>
           {
-            user && user.accoutType !== "Instructor" && (
+            user && user.accountType !== ACCOUNT_TYPE.INSTRUCTOR  && (
               <div className='relative  flex flex-row gap-1  items-center cursor-pointer' onClick={()=>navigate("/dashboard/cart")}>
                 <FaShoppingCart />
                 <div>{cart.totalItems}</div>

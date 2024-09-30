@@ -12,13 +12,14 @@ const Catalog = () => {
     const {catalogName} =  useParams();
     const [catalogCourse, setCatalogCourse] = useState([]);
     const [categoryId, setCategoryId] = useState("");
+    const [active, setActive] = useState(1);
 
     // fetch all categories
     useEffect(()=>{
 
         const getCategories  = async()=>{
             const res = await apiConnector("GET",categories.CATEGORY_API );
-            console.log("res is category : ", res);
+            // console.log("res is category : ", res);
             const  category_id = 
             res?.data?.data?.filter((ct)=> ct.categoryName?.split(" ")?.join("-")?.toLowerCase() === catalogName)[0]._id;
             setCategoryId(category_id);
@@ -32,7 +33,7 @@ const Catalog = () => {
             try {
                 const res = await getCatalogPageData(categoryId);
                 setCatalogCourse(res);
-                // console.log("res is :", res);
+                console.log("res is :", res);
             } catch (error) {
                 console.log("Error at getting Catgory Details",error);
             }
@@ -68,38 +69,54 @@ const Catalog = () => {
                 </div>
         </div>
 
-        <div>
+        <div className='w-full'>
                 {/* section 1 */}
-                <div>
-
-                    <h3>Courses to get you started</h3>
-                    <div className='flex gap-x-4 items-center'>
-                        <p>Most Popular</p> 
-                        <p>New</p>
+                <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+                    <div className="section_heading">Courses to get you started</div>
+                    <div className="my-4 flex border-b border-b-richblack-600 text-sm">
+                    <p
+                        className={`px-4 py-2 ${
+                        active === 1
+                            ? "border-b border-b-yellow-25 text-yellow-25"
+                            : "text-richblack-50"
+                        } cursor-pointer`}
+                        onClick={() => setActive(1)}
+                    >
+                        Most Populer
+                    </p>
+                    <p
+                        className={`px-4 py-2 ${
+                        active === 2
+                            ? "border-b border-b-yellow-25 text-yellow-25"
+                            : "text-richblack-50"
+                        } cursor-pointer`}
+                        onClick={() => setActive(2)}
+                    >
+                        New
+                    </p>
                     </div>
-                    <div>
-                        <CourseSlider
-                            Courses = {catalogCourse?.getCoursebyCategory?.course}
-                        />
+                    <div >
+                    <CourseSlider
+                        Courses={catalogCourse?.getCoursebyCategory?.course}
+                    />
                     </div>
-               
                 </div>
                 {/* section 2 */}
-                <div>
+                <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
                         <h3>Top Courses in {catalogCourse?.getCoursebyCategory?.categoryName}</h3>
-                        <div>
+                        <div className="py-8">
                             <CourseSlider
                                 Courses = {catalogCourse?.differentCategory?.course}
                             />
                         </div>
                 </div>
                 {/* section 3 */}
-                <div>
+                <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
                     <p>Frequently Brought Courses</p>
 
                     <div className='py-8'>
 
-                            <div className='grid grid-cols-1 lg:grid-cols-2'>
+                            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
 
                                     {
                                         catalogCourse?.mostSellingCourses?.length === 0 ? (<p>No Courses available</p>) : (

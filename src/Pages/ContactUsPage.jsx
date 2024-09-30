@@ -4,6 +4,7 @@ import { IoIosChatboxes } from "react-icons/io";
 import { BsGlobeCentralSouthAsia } from "react-icons/bs";
 import { IoCallSharp } from "react-icons/io5";
 import ContactUsForm from '../Components/common/ContactUsForm';
+import ReviewSlider from '../Components/common/ReviewSlider';
 
 
 const ContactUsPage = () => {
@@ -63,7 +64,18 @@ const ContactUsPage = () => {
             </div>
 
         </div>
+
+        
+     <div className="relative mx-auto py-20 flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 bg-richblack-900 text-white">
+        {/* Reviws from Other Learner */}
+        <h1 className="text-center text-4xl font-semibold mt-8">
+          Reviews from other learners
+        </h1>
+        {/* <ReviewSlider /> */}
+        <ReviewSlider />
+      </div>
      </div>
+
 
         <Footer/>
    </>

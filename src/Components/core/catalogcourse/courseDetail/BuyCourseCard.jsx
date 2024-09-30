@@ -109,7 +109,7 @@ const BuyCourseCard = ({course}) => {
                     <p className='text-xs text-caribbeangreen-50'>30-Day Money-Back Guarantee</p>
                 </div>
 
-                <div className='flex flex-col gap-2'>
+                <div className='flex flex-col gap-2 text-white'>
                     <h4>This course includes:</h4>
                     <p className='text-xs text-caribbeangreen-50 flex gap-1 items-center'> <IoIosTimer/> <span>8 hours on-demand video</span></p>
                     <p className='text-xs text-caribbeangreen-50 flex gap-1 items-center'> <FaMousePointer/> <span>Full Lifetime access</span></p>

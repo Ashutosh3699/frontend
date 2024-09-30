@@ -189,13 +189,20 @@ const VideoDetailCourse = () => {
 
                    {
                     videoEnded && (
-                      <div>
+                      <div
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(to top, rgb(0, 0, 0), rgba(0,0,0,0.7), rgba(0,0,0,0.5), rgba(0,0,0,0.1)",
+                      }}
+                      className="full absolute inset-0 z-[100] grid h-full place-content-center font-inter"
+                      >
                           {
                             !completedLectures?.includes(subSectionId) && (
                               <IconBtn
                                 disabled={loading}
                                 onclick={()=>handleCompleteVideo()}
                                 text={!loading ? "Marks as complete" : "...loading"}
+                                customCLass="text-xl max-w-max px-4 mx-auto"
                               />
                             )
                           }
@@ -209,9 +216,10 @@ const VideoDetailCourse = () => {
                                 setVideoEnded(false)
                               }
                             }}
+                             customClasses="text-xl max-w-max px-4 mx-auto mt-2"
                           />
 
-                          <div>
+                          <div  className="mt-10 flex min-w-[250px] justify-center gap-x-4 text-xl">
                                 {
                                   !isFirstVideo() && (
                                     <button
@@ -243,8 +251,8 @@ const VideoDetailCourse = () => {
             }
     
     <div>
-            <h1>{videoData.title}</h1>
-            <p>{videoData.videoDetail}</p>
+            <h1 className="mt-4 text-3xl font-semibold">{videoData.title}</h1>
+            <p className="pt-2 pb-6">{videoData.videoDetail}</p>
     </div>
     
     </div>

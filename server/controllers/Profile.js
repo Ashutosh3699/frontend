@@ -153,11 +153,11 @@ exports.getEnrolledCourses = async(req,res)=>{
 		}
 		let courseProgressCount = await CourseProgress.findOne({
             courseId: userDetails.accountCourses[i]._id,
-            userId
+            userId: userId
         })
 
-        // console.log("courseProgressCount is       ", courseProgressCount);
-		courseProgressCount = courseProgressCount?.completedVideo.length
+        console.log("courseProgressCount is  before     ", courseProgressCount);
+		courseProgressCount = courseProgressCount?.completedVideo.length || 0;
         console.log("courseProgressCount is   after     ", courseProgressCount);
 
 		if (SubsectionLength === 0) {
@@ -244,5 +244,36 @@ exports.updateProfilePic = async(req,res)=>{
             success:false,
             message: "Error occured, uploading the profile and not updated"
         })
+    }
+}
+
+// instructor dashboard
+exports.instructorDashboard= async(req,res)=>{
+
+    try {
+        
+        const courseDetails = await  Courses.find({instructor:req.user.id});
+
+        const courseData = courseDetails.map((course)=>{
+
+            const totalStudentsEnrolled = course.studentEnrolled.length;
+            const totalAmountGenerated = totalStudentsEnrolled * course.price;
+
+            const courseDataWithStats = {
+				_id: course._id,
+				courseName: course.courseName,
+				courseDescription: course.courseDescription,
+				totalStudentsEnrolled,
+				totalAmountGenerated,
+			}
+			return courseDataWithStats
+        })
+
+       return  res.status(200).json({courses:courseData});
+
+
+    } catch (error) {
+        console.error(error);
+		return res.status(500).json({message:"Internal Server Error"});
     }
 }
