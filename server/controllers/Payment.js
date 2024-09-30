@@ -6,7 +6,6 @@ const mailsender = require("../utils/mailSender");
 const { courseEnrollmentEmail } = require("../mail/template/courseEnrolledTemplate");
 const crypto = require("crypto");
 const { paymentSuccessEmail } = require("../mail/template/paymentSuccessEmail");
-const { FaBullseye } = require("react-icons/fa");
 const CourseProgress = require("../models/CourseProgress");
 
 
